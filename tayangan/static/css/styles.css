@@ -8,6 +8,46 @@
     /* padding-bottom: 2px; */
 }
 
+.left-container {
+    display: flex;  /* Use flexbox for layout */
+    justify-content: flex-start;  /* Horizontal alignment to the left */
+    align-items: center;  /* Vertical centering */
+    padding-top: 20px;  /* Padding at the top */
+    padding-left: 20px;  /* Padding on the left for spacing */
+}
+
+
+
+
+
+.d-flex {
+    width: 300px;  /* Control the width of the search field */
+    height: 60px;  /* Increase the height */
+    padding: 10px;  /* Add padding for better appearance */
+}
+
+.form-control::placeholder {
+    font-size: 1.25em;  /* Increase font size for placeholder */
+    color: #888;  /* Change placeholder text color */
+}
+
+
+
+
+.center-icon {
+    display: flex;  /* Use Flexbox */
+    justify-content: center;  /* Horizontal centering */
+    align-items: center;  /* Vertical centering */
+}
+
+.center-vertical {
+    height: 10px;
+    padding: 2px 2px;  
+    display: flex;
+    align-items: center;
+}
+
+
 .navbar {
     padding-top: 20px;  /* Increase top padding */
     padding-bottom: 20px;  /* Increase bottom padding */
@@ -20,5 +60,28 @@
 }
 
 .navbar-nav .nav-link {
-    font-size: 1.25rem;  /* Consistent font size for nav links */
+    font-size: 1.1rem;  /* Consistent font size for nav links */
+}
+
+.container-fluid {
+    padding-left: 40px;  /* Adds space on the left side */
+}
+
+.container-fluid {
+    padding-right: 40px;  /* Adds space on the left side */
+}
+
+
+
+
+
+.text-secondary-h1 {
+    color: rgb(89, 113, 113);  /* Secondary text color */
+    font-weight: bolder;  /* Make the text bold */
+    letter-spacing: -0.07em;
+}
+
+.text-secondary-h3 {
+    color: gray;  /* Secondary text color */
+    font-weight: bold;  /* Make the text bold */
 }
