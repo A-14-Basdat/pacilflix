@@ -1,0 +1,24 @@
+.center-container {
+    display: flex;  /* Use flexbox for layout */
+    justify-content: center;  /* Horizontal centering */
+    align-items: center;  /* Vertical centering */
+    /* height: 20vh;   */
+    /* padding: 20px;   */
+    padding-top: 50px;
+    /* padding-bottom: 2px; */
+}
+
+.navbar {
+    padding-top: 20px;  /* Increase top padding */
+    padding-bottom: 20px;  /* Increase bottom padding */
+    font-size: 1.25rem;  /* Increase the font size */
+}
+
+/* Adjust the font size for specific navbar elements */
+.navbar-brand {
+    font-size: 1.5rem;  /* Larger font size for the brand */
+}
+
+.navbar-nav .nav-link {
+    font-size: 1.25rem;  /* Consistent font size for nav links */
+}
