@@ -1,9 +1,7 @@
 from django.shortcuts import render
 
 def show_main(request):
-    # context = {
-    #     'name': 'Pak Bepe',
-    #     'class': 'PBP A'
-    # }
+   return render(request, "tayangan.html")
 
-    return render(request, "tayangan.html")
+def show_film(request):
+    return render(request, "film.html")

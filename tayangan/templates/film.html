@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    {% block meta %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.5/css/dataTables.bootstrap5.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/2.0.5/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/2.0.5/js/dataTables.bootstrap5.js"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <title>Film</title>
+    {% endblock meta %}
+
+    
+</head>
+
+<body>
+
+    {% block content %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <title>Film</title>
+    <div class="center-container">
+        <div class="card container-card">
+            <div class="center-container">  <!-- Container to center content -->
+                <h1 class="text-secondary-h1-card">Jurassic Park</h1>  <!-- The centered heading -->
+            </div>   
+            <div class="container" style="padding-left: 50px; padding-right: 50px; padding-bottom: 50px;">
+                <div class="card-body">
+                    <div class="left-container-card">  <!-- Container to center content -->
+                        <h3 class="text-secondary" style="margin-right: 15px;">Judul: </h3>
+                        <h3> Jurassic Park</h3>
+                    </div> 
+                    <div style="padding-top: 20px;">
+                        <button class="btn btn-outline-success" type="submit" style="width: 250px;font-size: 1.25em;">
+                            Tonton
+                        </button>
+                    </div>
+                    <div style="padding-top: 20px;">
+                        <button class="btn btn-outline-primary" type="submit" style="width: 250px;font-size: 1.25em;">
+                            Unduh Tayangan
+                        </button>
+                    </div>
+                    <div style="padding-top: 20px;">
+                        <button class="btn btn-outline-primary" type="submit" style="width: 250px;font-size: 1.25em;">
+                            Favorit Tayangan
+                        </button>
+                    </div>
+                    <div style="margin-top: 60px;">
+
+                    </div>
+                    <div class="left-container-card-data"> 
+                        <h5 class="text-secondary" style="margin-right: 15px;">Total View: </h5>
+                        <h5> 8100000</h5>
+                    </div> 
+                    <div class="left-container-card-data"> 
+                        <h5 class="text-secondary" style="margin-right: 15px;">Rating Rata-Rata: </h5>
+                        <h5> 8.5</h5>
+                    </div> 
+                    <div class="left-container-card-data"> 
+                        <h5 class="text-secondary" style="margin-right: 15px;">Sinopsis: </h5>
+                        <h5> 65 million years in the making.</h5>
+                    </div> 
+                    <div class="left-container-card-data"> 
+                        <h5 class="text-secondary" style="margin-right: 15px;">Durasi Film: </h5>
+                        <h5> 122</h5>
+                    </div> 
+                    <div class="left-container-card-data"> 
+                        <h5 class="text-secondary" style="margin-right: 15px;">Tanggal Rilis Film: </h5>
+                        <h5> 1993-07-11</h5>
+                    </div> 
+                    <div class="left-container-card-data"> 
+                        <h5 class="text-secondary" style="margin-right: 15px;">URL Film: </h5>
+                        <h5> </h5>
+                    </div> 
+                    <div>
+                        <div class="left-container-card-data"> 
+                            <h5 class="text-secondary" style="margin-right: 15px;">Genre: </h5>
+                        </div> 
+                        <ul style="list-style-type: disc; padding-left: 20px;">  <!-- Unordered list with bullet points -->
+                            <li>Action</li>
+                            <li>Adventure</li>
+                            <li>Science Fiction</li>
+                        </ul>
+                    </div>
+                    <div class="left-container-card-data"> 
+                        <h5 class="text-secondary" style="margin-right: 15px;">Asal Negara: </h5>
+                        <h5> Amerika Serikat </h5>
+                    </div> 
+                    <div>
+                        <div class="left-container-card-data"> 
+                            <h5 class="text-secondary" style="margin-right: 15px;">Pemain: </h5>
+                        </div> 
+                        <ul style="list-style-type: disc; padding-left: 20px;">  <!-- Unordered list with bullet points -->
+                            <li>Laura Dern</li>
+                            <li>Jeff Goldblum</li>
+                            <li>Sam Neill</li>
+                            <li>Richard Attenborough</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="left-container-card-data"> 
+                            <h5 class="text-secondary" style="margin-right: 15px;">Penulis Skenario: </h5>
+                        </div> 
+                        <ul style="list-style-type: disc; padding-left: 20px;">  <!-- Unordered list with bullet points -->
+                            <li>Steven Spielberg</li>
+                            <li>David Koepp</li>
+                            <li>Michael Crichton</li>
+                        </ul>
+                    </div>
+                    <div class="left-container-card-data"> 
+                        <h5 class="text-secondary" style="margin-right: 15px;">Sutradara: </h5>
+                        <h5> Steven Spielberg</h5>
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+</head>
