@@ -127,3 +127,9 @@
     align-items: center;  /* Vertical centering */
     padding-top: 7px;  /* Padding at the top */
 }
+
+
+
+.form-control::placeholder {
+    opacity: 0.5; /* Adjust the opacity as needed */
+}
