@@ -5,3 +5,6 @@ def show_main(request):
 
 def show_film(request):
     return render(request, "film.html")
+
+def show_series(request):
+    return render(request, "series.html")

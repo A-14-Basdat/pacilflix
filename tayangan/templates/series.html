@@ -17,7 +17,7 @@
 
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-    <title>Film</title>
+    <title>Series</title>
     {% endblock meta %}
 
     
@@ -27,22 +27,31 @@
 
     {% block content %}
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-    <title>Film</title>
+    <title>Series</title>
     <div class="center-container">
         <div class="card container-card">
             <div class="center-container">  <!-- Container to center content -->
-                <h1 class="text-secondary-h1-card">Jurassic Park</h1>  <!-- The centered heading -->
+                <h1 class="text-secondary-h1-card">Friends</h1>  <!-- The centered heading -->
             </div>   
             <div class="container" style="padding-left: 50px; padding-right: 50px; padding-bottom: 50px;">
                 <div class="card-body">
                     <div class="left-container-card">  <!-- Container to center content -->
                         <h3 class="text-secondary" style="margin-right: 15px;">Judul: </h3>
-                        <h3> Jurassic Park</h3>
+                        <h3> Friends</h3>
                     </div> 
-                    <div style="padding-top: 20px;">
-                        <button class="btn btn-outline-success" type="submit" style="width: 250px;font-size: 1.25em;">
-                            Tonton
-                        </button>
+                    <div>
+                        <div class="left-container-card-data"> 
+                            <h4 class="text-secondary" style="margin-right: 15px;">Episode: </h4>
+                        </div> 
+                        <ul style="list-style-type: disc; padding-left: 20px;">  <!-- Unordered list with bullet points -->
+                            <li><a href="#" class="link-primary" style="font-size: larger;">Episode 1</a></li>
+                            <li><a href="#" class="link-primary" style="font-size: larger;">Episode 2</a></li>
+                            <li><a href="#" class="link-primary" style="font-size: larger;">Episode 3</a></li>
+                            <li><a href="#" class="link-primary" style="font-size: larger;">Episode 4</a></li>
+                            <li><a href="#" class="link-primary" style="font-size: larger;">Episode 5</a></li>
+                            <li><a href="#" class="link-primary" style="font-size: larger;">Episode 6</a></li>
+                            <li><a href="#" class="link-primary" style="font-size: larger;">Episode 7</a></li>
+                        </ul>
                     </div>
                     <div style="padding-top: 20px;">
                         <button class="btn btn-outline-primary" type="submit" style="width: 250px;font-size: 1.25em;">
@@ -59,23 +68,15 @@
                     </div>
                     <div class="left-container-card-data"> 
                         <h5 class="text-secondary" style="margin-right: 15px;">Total View: </h5>
-                        <h5> 8100000</h5>
+                        <h5> 11500000</h5>
                     </div> 
                     <div class="left-container-card-data"> 
                         <h5 class="text-secondary" style="margin-right: 15px;">Rating Rata-Rata: </h5>
-                        <h5> 8.5</h5>
+                        <h5> 8.9</h5>
                     </div> 
                     <div class="left-container-card-data"> 
                         <h5 class="text-secondary" style="margin-right: 15px;">Sinopsis: </h5>
-                        <h5> 65 million years in the making.</h5>
-                    </div> 
-                    <div class="left-container-card-data"> 
-                        <h5 class="text-secondary" style="margin-right: 15px;">Durasi Film: </h5>
-                        <h5> 122</h5>
-                    </div> 
-                    <div class="left-container-card-data"> 
-                        <h5 class="text-secondary" style="margin-right: 15px;">Tanggal Rilis Film: </h5>
-                        <h5> 1993-07-11</h5>
+                        <h5> I'll be there for you.</h5>
                     </div> 
                     <div class="left-container-card-data"> 
                         <h5 class="text-secondary" style="margin-right: 15px;">URL Film: </h5>
@@ -86,9 +87,8 @@
                             <h5 class="text-secondary" style="margin-right: 15px;">Genre: </h5>
                         </div> 
                         <ul style="list-style-type: disc; padding-left: 20px;">  <!-- Unordered list with bullet points -->
-                            <li>Action</li>
-                            <li>Adventure</li>
-                            <li>Science Fiction</li>
+                            <li>Comedy</li>
+                            <li>Romance</li>
                         </ul>
                     </div>
                     <div class="left-container-card-data"> 
@@ -100,10 +100,12 @@
                             <h5 class="text-secondary" style="margin-right: 15px;">Pemain: </h5>
                         </div> 
                         <ul style="list-style-type: disc; padding-left: 20px;">  <!-- Unordered list with bullet points -->
-                            <li>Laura Dern</li>
-                            <li>Jeff Goldblum</li>
-                            <li>Sam Neill</li>
-                            <li>Richard Attenborough</li>
+                            <li>David Schwimmer</li>
+                            <li>Matthew Perry</li>
+                            <li>Matt LeBlanc</li>
+                            <li>Jennifer Aniston</li>
+                            <li>Courteney Cox</li>
+                            <li>Lisa Kudrow</li>
                         </ul>
                     </div>
                     <div>
@@ -111,18 +113,18 @@
                             <h5 class="text-secondary" style="margin-right: 15px;">Penulis Skenario: </h5>
                         </div> 
                         <ul style="list-style-type: disc; padding-left: 20px;">  <!-- Unordered list with bullet points -->
-                            <li>Steven Spielberg</li>
-                            <li>David Koepp</li>
-                            <li>Michael Crichton</li>
+                            <li>David Crane</li>
+                            <li>Marta Kauffman</li>
                         </ul>
                     </div>
                     <div class="left-container-card-data"> 
                         <h5 class="text-secondary" style="margin-right: 15px;">Sutradara: </h5>
-                        <h5> Steven Spielberg</h5>
+                        <h5> Peter Bonerz</h5>
                     </div> 
                 </div>
             </div>
         </div>
     </div>
     {% endblock %}
+
 </body>
