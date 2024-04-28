@@ -88,10 +88,23 @@
     width: 60%;  /* Use percentage to make it adaptive */
     max-width: 75rem;  /* Set a maximum width for larger screens */
     min-width: 20rem;  /* Set a minimum width for smaller screens */
-    border-radius: 45px;  /* Rounded corners */
+    border-radius: 30px;  /* Rounded corners */
     border: 3px solid #cccccc;  /* Grey border */
     margin-top: 40px;
     margin-bottom: 80px;
+}
+
+.container-table {
+    width: 90%;  /* Use percentage to make it adaptive */
+    max-width: 75rem;  /* Set a maximum width for larger screens */
+    min-width: 20rem;  /* Set a minimum width for smaller screens */
+    border-radius: 30px;  /* Rounded corners */
+    border: 3px solid #cccccc;  /* Grey border */
+    margin-top: 0px;
+    margin-bottom: 20px;
+    padding-bottom: 50px;
+    padding-left: 50px;
+    padding-right: 50px;
 }
 
 .text-secondary-h1-card {
