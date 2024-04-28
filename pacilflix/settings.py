@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'tayangan',
     'contributor',
-    'favorit'
+    'favorit',
+    'unduhan'
 ]
 
 MIDDLEWARE = [

@@ -22,4 +22,5 @@ urlpatterns = [
     path('', include('tayangan.urls')),
     path('contributor/', include('contributor.urls')),
     path('daftar-favorit/', include('favorit.urls')),
+    path('unduhan/', include('unduhan.urls')),
 ]
