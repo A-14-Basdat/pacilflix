@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    {% block meta %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.5/css/dataTables.bootstrap5.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/2.0.5/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/2.0.5/js/dataTables.bootstrap5.js"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <title>Tayangan</title>
+    {% endblock meta %}
+
+    
+</head>
+
+<body>
+
+    {% block content %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+    <div class="center-container">  <!-- Container to center content -->
+        <h1 class="text-secondary-h1">DAFTAR KONTRIBUTOR</h1>  <!-- The centered heading -->
+    </div>    
+   
+    
+    <div class="container my-5" w-10 pt-10 >
+        <div class="center-container">
+            
+            <div class="card container-table" style="padding-top: 50px;width:70%;">
+                <table id="example" class="table table-striped" style="width:100%; border-radius: 55px;">
+                    <thead>
+                        <tr>
+                            <th style="text-align: center;">Nama</th>
+                            <th style="text-align: center;">Tipe</th>
+                            <th style="text-align: center;">Jenis Kelamin</th>
+                            <th style="text-align: center;">Kewarganegaraan</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Steven Spielberg</td>
+                            <td>Sutradara</td>
+                            <td>Laki-laki</td>
+                            <td>Amerika Serikat</td>
+                        </tr>
+                        <tr>
+                            <td>David Fincher</td>
+                            <td>Sutradara</td>
+                            <td>Laki-laki</td>
+                            <td>Amerika Serikat</td>
+                        </tr>
+                        <tr>
+                            <td>Daniel Kaluuya</td>
+                            <td>Pemeran</td>
+                            <td>Laki-laki</td>
+                            <td>Britania Raya</td>
+                        </tr>
+                        <tr>
+                            <td>Jennifer Aniston</td>
+                            <td>Pemeran</td>
+                            <td>Perempuan</td>
+                            <td>Amerika Serikat</td>
+                        </tr>
+                        <tr>
+                            <td>Larry David</td>
+                            <td>Penulis Skenario</td>
+                            <td>Laki-laki</td>
+                            <td>Amerika Serikat</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+</body>
