@@ -20,7 +20,7 @@
 
         <nav class="navbar navbar-expand-lg "  style="border: 2px solid #ced4da; background-color: white;">
             <div class="container-fluid">
-              <a class="navbar-brand" href="#">
+              <a class="navbar-brand" href="{% url 'tayangan:show_main' %}">
                 <img src="{% static 'image/Screen Shot 2024-04-27 at 21.40.06 1-Photoroom.png' %}" style="max-width: 180px; height: autos;">
               </a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
@@ -29,19 +29,19 @@
               <div class="collapse navbar-collapse" id="navbarTogglerDemo02" >
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                   <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Daftar Tayangan</a>
+                    <a class="nav-link" aria-current="page" href="{% url 'tayangan:show_main' %}">Daftar Tayangan</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="#">Daftar Kontributor</a>
+                    <a class="nav-link" aria-current="page" href="{% url 'contributor:show_contributor' %}">Daftar Kontributor</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="#">Kelola Daftar Favorit</a>
+                    <a class="nav-link" aria-current="page" href="{% url 'favorit:show_favorit' %}">Kelola Daftar Favorit</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="#">Kelola Daftar Unduhan</a>
+                    <a class="nav-link" aria-current="page" href="{% url 'unduhan:show_unduhan' %}">Kelola Daftar Unduhan</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="#">Kelola Langganan</a>
+                    <a class="nav-link" aria-current="page" href="{% url 'langganan:show_langganan' %}">Kelola Langganan</a>
                   </li>
                 </ul>
                 <form class="nav-item">
