@@ -76,6 +76,8 @@
     color: rgb(89, 113, 113);  /* Secondary text color */
     font-weight: bolder;  /* Make the text bold */
     letter-spacing: -0.07em;
+    margin-top: 25px;
+    margin-bottom: 25px;
 }
 
 .text-secondary {
