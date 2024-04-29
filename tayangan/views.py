@@ -8,3 +8,6 @@ def show_film(request):
 
 def show_series(request):
     return render(request, "series.html")
+
+def show_episode(request):
+    return render(request, "episode.html")
