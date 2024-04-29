@@ -27,7 +27,7 @@
 
     {% block content %}
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-    <div class="container" style="margin-bottom: 70px;">
+    <div class="container" style="margin-bottom: 100px;">
         <title>Film</title>
         <div class="center-container">  <!-- Container to center content -->
             <h1 class="text-secondary-h1">Jurassic Park</h1>  <!-- The centered heading -->
@@ -128,6 +128,76 @@
                 </div>
             </div>
         </div>
+
+        <div style="    border-top: 3px dashed rgb(188, 187, 187); margin-top: 20px; margin-bottom: 20px; "></div> <!-- dashed line -->
+
+        <div class="center-container">  <!-- Container to center content -->
+            <h1 class="text-secondary-h1">BAGIAN &nbsp ULASAN</h1>  <!-- The centered heading -->
+        </div>  
+        <div class="container my-5" style="padding-left: 200px; padding-right: 200px;">
+            <form>
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1" style="font-size: 1.25em; margin-bottom: 20px;">Deskripsi Ulasan</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" style="font-size: 1.25em;"></textarea>
+                </div>
+                <div style="margin-bottom: 30px;">
+
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlSelect1" style="font-size: 1.25em; margin-bottom: 20px;">Rating</label>
+                    <select class="form-control" id="exampleFormControlSelect1" style="font-size: 1.25em;">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                    </select>
+                </div>
+                <div style="margin-top: 30px; margin-bottom: 30px;">
+                    <button class="btn btn-outline-success" type="submit" style="width: 100%;font-size: 1.25em;">
+                        Submit Ulasan
+                    </button>
+                </div>
+            </form>
+        </div>
+        
+        <div class="container my-5" w-10>
+            <div class="center-container">
+                
+                <div class="card container-table" style="width:100%;">
+                    <div class="left-container">
+                        <h3 class="text-secondary" style="margin-top: 30px; margin-left: 20px;">Daftar Ulasan:</h3>
+                    </div>
+                    <table id="example" class="table table-striped" style="width:100%; border-radius: 55px;">
+                        <thead>
+                            <tr>
+                                <th style="text-align: center;">id_tayangan</th>
+                                <th style="text-align: center;">Nama</th>
+                                <th style="text-align: center;">Waktu</th>
+                                <th style="text-align: center;">Rating</th>
+                                <th style="text-align: center;">Deskripsi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>d2718217-0546-4b92-9c3f-4e71b31d85d8</td>
+                                <td>andikusnadi11</td>
+                                <td>4/19/2024 9:47:27</td>
+                                <td>8</td>
+                                <td>CGI-nya rill banget</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+            </div>
+        </div>
+        
     </div>
     {% endblock %}
 </body>
