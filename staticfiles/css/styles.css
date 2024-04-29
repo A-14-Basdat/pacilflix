@@ -64,8 +64,8 @@
 }
 
 .container-fluid {
-    padding-left: 80px;  /* Left padding for spacing */
-    padding-right: 80px;  /* Right padding for spacing */
+    padding-left: 100px;  /* Left padding for spacing */
+    padding-right: 100px;  /* Right padding for spacing */
 }
 
 
@@ -89,7 +89,7 @@
     max-width: 75rem;  /* Set a maximum width for larger screens */
     min-width: 20rem;  /* Set a minimum width for smaller screens */
     border-radius: 30px;  /* Rounded corners */
-    border: 3px solid #cccccc;  /* Grey border */
+    border: 2px solid #cccccc;  /* Grey border */
     margin-top: 40px;
     margin-bottom: 80px;
 }
@@ -99,7 +99,7 @@
     max-width: 75rem;  /* Set a maximum width for larger screens */
     min-width: 20rem;  /* Set a minimum width for smaller screens */
     border-radius: 30px;  /* Rounded corners */
-    border: 3px solid #cccccc;  /* Grey border */
+    border: 2px solid #cccccc;  /* Grey border */
     margin-top: 0px;
     margin-bottom: 20px;
     padding-bottom: 60px;

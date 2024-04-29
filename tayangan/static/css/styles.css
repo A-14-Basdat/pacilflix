@@ -64,8 +64,8 @@
 }
 
 .container-fluid {
-    padding-left: 80px;  /* Left padding for spacing */
-    padding-right: 80px;  /* Right padding for spacing */
+    padding-left: 100px;  /* Left padding for spacing */
+    padding-right: 100px;  /* Right padding for spacing */
 }
 
 
@@ -131,5 +131,14 @@
 
 
 .form-control::placeholder {
-    opacity: 0.5; /* Adjust the opacity as needed */
+    opacity: 0.7; /* Adjust the opacity as needed */
 }
+
+
+
+
+.my-buttons {
+    display: inline-grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 70px;
+  }

@@ -35,18 +35,30 @@
     
     <div class="container my-5" w-10 pt-10 >
         <div class="left-container">  <!-- Container to center content -->
-            <form class="d-flex" role="search" style="margin-left: 40px; width: 350px;">
-                <input class="form-control me-2" type="search" placeholder="Search by Judul" 
+            <form class="d-flex" role="search" style="margin-left: 40px; width: 350px; ">
+                <input class="form-control me-2" type="search" placeholder="Search by Judul..." 
                 aria-label="Search" style="background-color: white;font-size: medium; width: 100%;">
             </form>
-        </div> 
+        </div>
         <div class="center-container">
             
             <div class="card container-table">
                 <div class="left-container">
                     <h3 class="text-secondary" style="margin-top: 30px; margin-left: 20px;">10 Tayangan Terbaik Minggu ini</h3>
                 </div>
-                <table id="example" class="table table-striped" style="width:100%; border-radius: 55px;">
+                <div class="center-container">
+                    <div class="my-buttons">
+                        <button class="btn btn-outline-success col-10 mx-auto" style="width: 500px; font-size: 1.2em; vertical-align: sub;"" type="submit">
+                            Global
+                            <ion-icon name="star-outline"></ion-icon>                
+                        </button>
+                        <button class="btn btn-outline-success col-10 mx-auto" style="width: 500px; font-size: 1.2em;" type="submit">
+                            Lokal
+                            <ion-icon name="star-outline"></ion-icon>     
+                        </button>
+                    </div>
+                </div>
+                <table id="example" class="table table-striped" style="width:100%; border-radius: 55px; margin-top: 30px;">
                     <thead>
                         <tr>
                             <th style="text-align: center;">Peringkat</th>
