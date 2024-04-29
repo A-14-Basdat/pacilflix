@@ -105,6 +105,8 @@
     padding-bottom: 60px;
     padding-left: 50px;
     padding-right: 50px;
+    margin-top: -20px;
+    margin-bottom: -20px;
 }
 
 .text-secondary-h1-card {
@@ -131,5 +133,14 @@
 
 
 .form-control::placeholder {
-    opacity: 0.5; /* Adjust the opacity as needed */
+    opacity: 0.7; /* Adjust the opacity as needed */
 }
+
+
+
+
+.my-buttons {
+    display: inline-grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 70px;
+  }
