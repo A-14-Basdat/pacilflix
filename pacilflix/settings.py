@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'tayangan',
     'contributor',
     'favorit',
-    'unduhan'
+    'unduhan',
+    'langganan'
 ]
 
 MIDDLEWARE = [
