@@ -16,6 +16,13 @@
     padding-left: 20px;  /* Padding on the left for spacing */
 }
 
+.pilih-pembayaran-container {
+    display: flex;  /* Use flexbox for layout */
+    justify-content: center;  /* Horizontal alignment to the left */
+    align-items: center;  /* Vertical centering */
+    padding-top: 20px;  /* Padding at the top */
+}
+
 
 
 
