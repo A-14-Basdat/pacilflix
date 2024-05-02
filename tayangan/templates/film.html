@@ -7,16 +7,7 @@
 <head>
     <meta charset="UTF-8">
     {% block meta %}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.5/css/dataTables.bootstrap5.css">
-    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.datatables.net/2.0.5/js/dataTables.js"></script>
-    <script src="https://cdn.datatables.net/2.0.5/js/dataTables.bootstrap5.js"></script>
-    <script src="{% static 'js/script.js' %}"></script>
 
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <title>Film</title>
     {% endblock meta %}
 
@@ -47,17 +38,71 @@
                             </button>
                         </div>
                         <div style="padding-top: 20px;">
-                            <button class="btn btn-outline-primary" type="submit" style="width: 250px;font-size: 1.25em;">
+                            <button type="button" class="btn btn-outline-primary" style="width: 250px;font-size: 1.25em;" data-bs-toggle="modal" data-bs-target="#unduhModal">
                                 Unduh Tayangan &nbsp
                                 <ion-icon name="cloud-download-outline" style="vertical-align: text-bottom;"></ion-icon>
                             </button>
+                            <div class="modal fade" id="unduhModal" tabindex="-1" aria-labelledby="unduhModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="unduhModalLabel" style="text-align: center; width: 100%;">SUKSES MENAMBAHKAN
+                                        TAYANGAN KE DAFTAR
+                                        UNDUHAN</h5>
+                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <!-- Jurassic Park itu [Judul Tayangan]; 2024-05-09 itu  [current time + 7 hari] -->
+                                        Selamat! Anda telah berhasil mengunduh Jurassic Park dan akan 
+                                        berlaku hingga 2024-05-09. Cek informasi selengkapnya
+                                        pada halaman daftar unduhan.
+                                    </div>
+                                    <div class="modal-footer justify-content-center">
+                                        <button type="button" class="btn btn-primary " data-bs-dismiss="modal">Ke Daftar Unduhan</button>
+                                      </div>
+                                  </div>
+                                </div>
+                            </div>
                         </div>
                         <div style="padding-top: 20px;">
-                            <button class="btn btn-outline-primary" type="submit" style="width: 250px;font-size: 1.25em;">
+                            <button  type="button" class="btn btn-outline-primary" style="width: 250px;font-size: 1.25em;" data-bs-toggle="modal" data-bs-target="#favoritModal">
                                 Favorit Tayangan
                                 <ion-icon name="bookmark-outline" style="vertical-align: text-bottom;"></ion-icon>
                             </button>
+                            <div class="modal fade" id="favoritModal" tabindex="-1" aria-labelledby="favoritModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="favoritModalLabel" style="text-align: center; width: 100%;">TAMBAH KE DAFTAR FAVORIT MODAL</h5>
+                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form>
+                                            <div class="form-group mb-4">
+                                                <label for="exampleFormControlSelect1" style="font-size: 1.25em; margin-bottom: 10px; font-size: larger;">Judul Daftar Favorit</label>
+                                                <select class="form-control" id="exampleFormControlSelect1" style="font-size: 1.25em;">
+                                                    <option>Daftar Favorit A</option>
+                                                    <option>Daftar Favorit B</option>
+                                                    <option>Daftar Favorit C</option>
+                                                </select>
+                                            </div>
+
+                                            <div style="margin-bottom: 30px;">
+                            
+                                            </div>
+
+                                            <div style="margin-top: 30px; margin-bottom: 30px;">
+                                                <button class="btn btn-outline-success" type="submit" style="width: 100%;font-size: 1.25em;">
+                                                    Tambah
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                  </div>
+                                </div>
+                            </div>
                         </div>
+                        
                         <div style="margin-top: 60px;">
 
                         </div>
