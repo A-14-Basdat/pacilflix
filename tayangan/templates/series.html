@@ -1,0 +1,192 @@
+{% extends 'base.html' %}
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    {% block meta %}
+    <title>Series</title>
+    {% endblock meta %}
+
+    
+</head>
+
+<body>
+
+    {% block content %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <div class="container" style="margin-bottom: 70px;"> 
+        <div class="center-container">  <!-- Container to center content -->
+            <h1 class="text-secondary mt-4">HALAMAN SERIES</h1>  <!-- The centered heading -->
+        </div> 
+        <div class="center-container">
+            <div class="card container-card" style="width: 50%;">
+                <div class="container" style="padding-left: 50px; padding-right: 50px; padding-bottom: 50px;">
+                    <div class="card-body">
+                        <div class="left-container-card" style="margin-top: 30px;">  <!-- Container to center content -->
+                            <h3 class="text-secondary" style="margin-right: 15px;">Judul: </h3>
+                            <h3> Friends</h3>
+                        </div> 
+                        <div>
+                            <div class="left-container-card-data"> 
+                                <h4 class="text-secondary" style="margin-right: 15px;">Episode: </h4>
+                            </div> 
+                            <ul style="list-style-type: disc; padding-left: 20px;">  <!-- Unordered list with bullet points -->
+                                <li><a href="#" class="link-primary link-underline-opacity-25 link-underline-opacity-100-hover" style="font-size: larger;">Episode 1</a></li>
+                                <li><a href="#" class="link-primary link-underline-opacity-25 link-underline-opacity-100-hover" style="font-size: larger;">Episode 2</a></li>
+                                <li><a href="#" class="link-primary link-underline-opacity-25 link-underline-opacity-100-hover" style="font-size: larger;">Episode 3</a></li>
+                                <li><a href="#" class="link-primary link-underline-opacity-25 link-underline-opacity-100-hover" style="font-size: larger;">Episode 4</a></li>
+                                <li><a href="#" class="link-primary link-underline-opacity-25 link-underline-opacity-100-hover" style="font-size: larger;">Episode 5</a></li>
+                                <li><a href="#" class="link-primary link-underline-opacity-25 link-underline-opacity-100-hover" style="font-size: larger;">Episode 6</a></li>
+                                <li><a href="#" class="link-primary link-underline-opacity-25 link-underline-opacity-100-hover" style="font-size: larger;">Episode 7</a></li>
+                            </ul>
+                        </div>
+                        <div style="padding-top: 20px;">
+                            <button class="btn btn-outline-primary" type="submit" style="width: 250px;font-size: 1.25em;">
+                                Unduh Tayangan &nbsp
+                                <ion-icon name="cloud-download-outline" style="vertical-align: text-bottom;"></ion-icon>
+                            </button>
+                        </div>
+                        <div style="padding-top: 20px;">
+                            <button class="btn btn-outline-primary" type="submit" style="width: 250px;font-size: 1.25em;">
+                                Favorit Tayangan
+                                <ion-icon name="bookmark-outline" style="vertical-align: text-bottom;"></ion-icon>
+                            </button>
+                        </div>
+                        <div style="margin-top: 60px;">
+
+                        </div>
+                        <div class="left-container-card-data"> 
+                            <h5 class="text-secondary" style="margin-right: 15px;">Total View: </h5>
+                            <h5> 11500000</h5>
+                        </div> 
+                        <div class="left-container-card-data"> 
+                            <h5 class="text-secondary" style="margin-right: 15px;">Rating Rata-Rata: </h5>
+                            <h5> 8.9</h5>
+                        </div> 
+                        <div class="left-container-card-data"> 
+                            <h5 class="text-secondary" style="margin-right: 15px;">Sinopsis: </h5>
+                            <h5> I'll be there for you.</h5>
+                        </div> 
+                        <div class="left-container-card-data"> 
+                            <h5 class="text-secondary" style="margin-right: 15px;">URL Film: </h5>
+                            <h5> </h5>
+                        </div> 
+                        <div>
+                            <div class="left-container-card-data"> 
+                                <h5 class="text-secondary" style="margin-right: 15px;">Genre: </h5>
+                            </div> 
+                            <ul style="list-style-type: disc; padding-left: 20px;">  <!-- Unordered list with bullet points -->
+                                <li>Comedy</li>
+                                <li>Romance</li>
+                            </ul>
+                        </div>
+                        <div class="left-container-card-data"> 
+                            <h5 class="text-secondary" style="margin-right: 15px;">Asal Negara: </h5>
+                            <h5> Amerika Serikat </h5>
+                        </div> 
+                        <div>
+                            <div class="left-container-card-data"> 
+                                <h5 class="text-secondary" style="margin-right: 15px;">Pemain: </h5>
+                            </div> 
+                            <ul style="list-style-type: disc; padding-left: 20px;">  <!-- Unordered list with bullet points -->
+                                <li>David Schwimmer</li>
+                                <li>Matthew Perry</li>
+                                <li>Matt LeBlanc</li>
+                                <li>Jennifer Aniston</li>
+                                <li>Courteney Cox</li>
+                                <li>Lisa Kudrow</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="left-container-card-data"> 
+                                <h5 class="text-secondary" style="margin-right: 15px;">Penulis Skenario: </h5>
+                            </div> 
+                            <ul style="list-style-type: disc; padding-left: 20px;">  <!-- Unordered list with bullet points -->
+                                <li>David Crane</li>
+                                <li>Marta Kauffman</li>
+                            </ul>
+                        </div>
+                        <div class="left-container-card-data"> 
+                            <h5 class="text-secondary" style="margin-right: 15px;">Sutradara: </h5>
+                            <h5> Peter Bonerz</h5>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="    border-top: 3px dashed rgb(188, 187, 187); margin-top: 20px; margin-bottom: 20px; "></div> <!-- dashed line -->
+
+        <div class="center-container">  <!-- Container to center content -->
+            <h1 class="text-secondary-h1">BAGIAN &nbsp ULASAN</h1>  <!-- The centered heading -->
+        </div>  
+        <div class="container my-5" style="padding-left: 200px; padding-right: 200px;">
+            <form>
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1" style="font-size: 1.25em; margin-bottom: 20px;">Deskripsi Ulasan</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" style="font-size: 1.25em;"></textarea>
+                </div>
+                <div style="margin-bottom: 30px;">
+
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlSelect1" style="font-size: 1.25em; margin-bottom: 20px;">Rating</label>
+                    <select class="form-control" id="exampleFormControlSelect1" style="font-size: 1.25em;">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                    </select>
+                </div>
+                <div style="margin-top: 30px; margin-bottom: 30px;">
+                    <button class="btn btn-outline-success" type="submit" style="width: 100%;font-size: 1.25em;">
+                        Submit Ulasan
+                    </button>
+                </div>
+            </form>
+        </div>
+        
+        <div class="container my-5" w-10>
+            <div class="center-container">
+                
+                <div class="card container-table" style="width:100%;">
+                    <div class="left-container">
+                        <h3 class="text-secondary" style="margin-top: 30px; margin-left: 20px;">Daftar Ulasan:</h3>
+                    </div>
+                    <table id="example" class="table table-striped" style="width:100%; border-radius: 55px;">
+                        <thead>
+                            <tr>
+                                <th style="text-align: center;">id_tayangan</th>
+                                <th style="text-align: center;">Nama</th>
+                                <th style="text-align: center;">Waktu</th>
+                                <th style="text-align: center;">Rating</th>
+                                <th style="text-align: center;">Deskripsi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>d2718217-0546-4b92-9c3f-4e71b31d85d8</td>
+                                <td>budibudiman22</td>
+                                <td>4/21/2024 10:47:27</td>
+                                <td>9</td>
+                                <td>Lucu banget</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+    {% endblock %}
+
+</body>

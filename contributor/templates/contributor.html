@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    {% block meta %}
+    <title>Contributor</title>
+    {% endblock meta %}
+
+    
+</head>
+
+<body>
+
+    {% block content %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <div class="container" style="margin-bottom: 70px;">
+
+        <div class="center-container">  <!-- Container to center content -->
+            <h1 class="text-secondary-h1">DAFTAR &nbsp KONTRIBUTOR</h1>  <!-- The centered heading -->
+        </div>    
+    
+        
+        <div class="container my-5" w-10 pt-10 >
+            <div class="center-container">
+                
+                <div class="card container-table" style="padding-top: 50px;width:70%;">
+                    <table id="example" class="table table-striped" style="width:100%; border-radius: 55px;">
+                        <thead>
+                            <tr>
+                                <th style="text-align: center;">Nama</th>
+                                <th style="text-align: center;">Tipe</th>
+                                <th style="text-align: center;">Jenis Kelamin</th>
+                                <th style="text-align: center;">Kewarganegaraan</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Steven Spielberg</td>
+                                <td>Sutradara</td>
+                                <td>Laki-laki</td>
+                                <td>Amerika Serikat</td>
+                            </tr>
+                            <tr>
+                                <td>David Fincher</td>
+                                <td>Sutradara</td>
+                                <td>Laki-laki</td>
+                                <td>Amerika Serikat</td>
+                            </tr>
+                            <tr>
+                                <td>Daniel Kaluuya</td>
+                                <td>Pemain</td>
+                                <td>Laki-laki</td>
+                                <td>Britania Raya</td>
+                            </tr>
+                            <tr>
+                                <td>Jennifer Aniston</td>
+                                <td>Pemain</td>
+                                <td>Perempuan</td>
+                                <td>Amerika Serikat</td>
+                            </tr>
+                            <tr>
+                                <td>Larry David</td>
+                                <td>Penulis Skenario</td>
+                                <td>Laki-laki</td>
+                                <td>Amerika Serikat</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+</body>

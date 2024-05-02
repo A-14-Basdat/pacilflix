@@ -1,0 +1,248 @@
+{% extends 'base.html' %}
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    {% block meta %}
+
+    <title>Film</title>
+    {% endblock meta %}
+
+    
+</head>
+
+<body>
+
+    {% block content %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <div class="container" style="margin-bottom: 100px;">
+        <title>Film</title>
+        <div class="center-container">  <!-- Container to center content -->
+            <h1 class="text-secondary mt-4">HALAMAN FILM</h1>  <!-- The centered heading -->
+        </div>     
+        <div class="center-container">
+            <div class="card container-card" style="width:50%;">
+                <div class="container" style="padding-left: 50px; padding-right: 50px; padding-bottom: 50px;">
+                    <div class="card-body">
+                        <div class="left-container-card" style="margin-top: 30px;">  <!-- Container to center content -->
+                            <h3 class="text-secondary" style="margin-right: 15px;">Judul: </h3>
+                            <h3> Jurassic Park</h3>
+                        </div> 
+                        <div style="margin-top: 30px; margin-bottom: 30px;">
+                            <button class="btn btn-outline-success" type="submit" style="width: 250px;font-size: 1.25em;">
+                                Tonton
+                                <ion-icon name="play-circle-outline" style="vertical-align: text-bottom;"></ion-icon>
+                            </button>
+                        </div>
+                        <div style="padding-top: 20px;">
+                            <button type="button" class="btn btn-outline-primary" style="width: 250px;font-size: 1.25em;" data-bs-toggle="modal" data-bs-target="#unduhModal">
+                                Unduh Tayangan &nbsp
+                                <ion-icon name="cloud-download-outline" style="vertical-align: text-bottom;"></ion-icon>
+                            </button>
+                            <div class="modal fade" id="unduhModal" tabindex="-1" aria-labelledby="unduhModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="unduhModalLabel" style="text-align: center; width: 100%;">SUKSES MENAMBAHKAN
+                                        TAYANGAN KE DAFTAR
+                                        UNDUHAN</h5>
+                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <!-- Jurassic Park itu [Judul Tayangan]; 2024-05-09 itu  [current time + 7 hari] -->
+                                        Selamat! Anda telah berhasil mengunduh Jurassic Park dan akan 
+                                        berlaku hingga 2024-05-09. Cek informasi selengkapnya
+                                        pada halaman daftar unduhan.
+                                    </div>
+                                    <div class="modal-footer justify-content-center">
+                                        <button type="button" class="btn btn-primary " data-bs-dismiss="modal">Ke Daftar Unduhan</button>
+                                      </div>
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="padding-top: 20px;">
+                            <button  type="button" class="btn btn-outline-primary" style="width: 250px;font-size: 1.25em;" data-bs-toggle="modal" data-bs-target="#favoritModal">
+                                Favorit Tayangan
+                                <ion-icon name="bookmark-outline" style="vertical-align: text-bottom;"></ion-icon>
+                            </button>
+                            <div class="modal fade" id="favoritModal" tabindex="-1" aria-labelledby="favoritModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="favoritModalLabel" style="text-align: center; width: 100%;">TAMBAH KE DAFTAR FAVORIT MODAL</h5>
+                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form>
+                                            <div class="form-group mb-4">
+                                                <label for="exampleFormControlSelect1" style="font-size: 1.25em; margin-bottom: 10px; font-size: larger;">Judul Daftar Favorit</label>
+                                                <select class="form-control" id="exampleFormControlSelect1" style="font-size: 1.25em;">
+                                                    <option>Daftar Favorit A</option>
+                                                    <option>Daftar Favorit B</option>
+                                                    <option>Daftar Favorit C</option>
+                                                </select>
+                                            </div>
+
+                                            <div style="margin-bottom: 30px;">
+                            
+                                            </div>
+
+                                            <div style="margin-top: 30px; margin-bottom: 30px;">
+                                                <button class="btn btn-outline-success" type="submit" style="width: 100%;font-size: 1.25em;">
+                                                    Tambah
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-top: 60px;">
+
+                        </div>
+                        <div class="left-container-card-data"> 
+                            <h5 class="text-secondary" style="margin-right: 15px;">Total View: </h5>
+                            <h5> 8100000</h5>
+                        </div> 
+                        <div class="left-container-card-data"> 
+                            <h5 class="text-secondary" style="margin-right: 15px;">Rating Rata-Rata: </h5>
+                            <h5> 8.5</h5>
+                        </div> 
+                        <div class="left-container-card-data"> 
+                            <h5 class="text-secondary" style="margin-right: 15px;">Sinopsis: </h5>
+                            <h5> 65 million years in the making.</h5>
+                        </div> 
+                        <div class="left-container-card-data"> 
+                            <h5 class="text-secondary" style="margin-right: 15px;">Durasi Film: </h5>
+                            <h5> 122</h5>
+                        </div> 
+                        <div class="left-container-card-data"> 
+                            <h5 class="text-secondary" style="margin-right: 15px;">Tanggal Rilis Film: </h5>
+                            <h5> 1993-07-11</h5>
+                        </div> 
+                        <div class="left-container-card-data"> 
+                            <h5 class="text-secondary" style="margin-right: 15px;">URL Film: </h5>
+                            <h5> </h5>
+                        </div> 
+                        <div>
+                            <div class="left-container-card-data"> 
+                                <h5 class="text-secondary" style="margin-right: 15px;">Genre: </h5>
+                            </div> 
+                            <ul style="list-style-type: disc; padding-left: 20px;">  <!-- Unordered list with bullet points -->
+                                <li>Action</li>
+                                <li>Adventure</li>
+                                <li>Science Fiction</li>
+                            </ul>
+                        </div>
+                        <div class="left-container-card-data"> 
+                            <h5 class="text-secondary" style="margin-right: 15px;">Asal Negara: </h5>
+                            <h5> Amerika Serikat </h5>
+                        </div> 
+                        <div>
+                            <div class="left-container-card-data"> 
+                                <h5 class="text-secondary" style="margin-right: 15px;">Pemain: </h5>
+                            </div> 
+                            <ul style="list-style-type: disc; padding-left: 20px;">  <!-- Unordered list with bullet points -->
+                                <li>Laura Dern</li>
+                                <li>Jeff Goldblum</li>
+                                <li>Sam Neill</li>
+                                <li>Richard Attenborough</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="left-container-card-data"> 
+                                <h5 class="text-secondary" style="margin-right: 15px;">Penulis Skenario: </h5>
+                            </div> 
+                            <ul style="list-style-type: disc; padding-left: 20px;">  <!-- Unordered list with bullet points -->
+                                <li>Steven Spielberg</li>
+                                <li>David Koepp</li>
+                                <li>Michael Crichton</li>
+                            </ul>
+                        </div>
+                        <div class="left-container-card-data"> 
+                            <h5 class="text-secondary" style="margin-right: 15px;">Sutradara: </h5>
+                            <h5> Steven Spielberg</h5>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="    border-top: 3px dashed rgb(188, 187, 187); margin-top: 20px; margin-bottom: 20px; "></div> <!-- dashed line -->
+
+        <div class="center-container">  <!-- Container to center content -->
+            <h1 class="text-secondary-h1">BAGIAN &nbsp ULASAN</h1>  <!-- The centered heading -->
+        </div>  
+        <div class="container my-5" style="padding-left: 200px; padding-right: 200px;">
+            <form>
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1" style="font-size: 1.25em; margin-bottom: 20px;">Deskripsi Ulasan</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" style="font-size: 1.25em;"></textarea>
+                </div>
+                <div style="margin-bottom: 30px;">
+
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlSelect1" style="font-size: 1.25em; margin-bottom: 20px;">Rating</label>
+                    <select class="form-control" id="exampleFormControlSelect1" style="font-size: 1.25em;">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                    </select>
+                </div>
+                <div style="margin-top: 30px; margin-bottom: 30px;">
+                    <button class="btn btn-outline-success" type="submit" style="width: 100%;font-size: 1.25em;">
+                        Submit Ulasan
+                    </button>
+                </div>
+            </form>
+        </div>
+        
+        <div class="container my-5" w-10>
+            <div class="center-container">
+                
+                <div class="card container-table" style="width:100%;">
+                    <div class="left-container">
+                        <h3 class="text-secondary" style="margin-top: 30px; margin-left: 20px;">Daftar Ulasan:</h3>
+                    </div>
+                    <table id="example" class="table table-striped" style="width:100%; border-radius: 55px;">
+                        <thead>
+                            <tr>
+                                <th style="text-align: center;">id_tayangan</th>
+                                <th style="text-align: center;">Nama</th>
+                                <th style="text-align: center;">Waktu</th>
+                                <th style="text-align: center;">Rating</th>
+                                <th style="text-align: center;">Deskripsi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>d2718217-0546-4b92-9c3f-4e71b31d85d8</td>
+                                <td>andikusnadi11</td>
+                                <td>4/19/2024 9:47:27</td>
+                                <td>8</td>
+                                <td>CGI-nya rill banget</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+    {% endblock %}
+</body>

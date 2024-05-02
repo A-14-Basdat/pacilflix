@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    {% block meta %}
+    <title>Episode</title>
+    {% endblock meta %}
+
+    
+</head>
+
+<body>
+
+    {% block content %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <div class="container" style="margin-bottom: 70px;"> 
+        <div class="center-container">  <!-- Container to center content -->
+            <h1 class="text-secondary-h1">HALAMAN EPISODE</h1>  <!-- The centered heading -->
+        </div> 
+        <div class="center-container">
+            <div class="card container-card" style="width: 50%;">
+                <div class="container" style="padding-left: 50px; padding-right: 50px; padding-bottom: 50px;">
+                    <div class="card-body">
+                        <div class="left-container-card" style="margin-top: 30px;">  <!-- Container to center content -->
+                            <h3 class="text-secondary" style="margin-right: 15px;">Judul: </h3>
+                            <h3> Friends</h3>
+                        </div> 
+                        <div class="left-container-card-data">  <!-- Container to center content -->
+                            <h4 class="text-secondary" style="margin-right: 15px;">Subjudul: </h4>
+                            <h4> The One Where Monica Gets a Roommate</h4>
+                        </div> 
+                        <div style="margin-top: 30px; margin-bottom: 30px;">
+                            <button class="btn btn-outline-success" type="submit" style="width: 250px;font-size: 1.25em;">
+                                Tonton
+                                <ion-icon name="play-circle-outline" style="vertical-align: text-bottom;"></ion-icon>
+                            </button>
+                        </div>
+                        <div>
+                            <div class="left-container-card-data"> 
+                                <h4 class="text-secondary" style="margin-right: 15px;">Episode lainnya: </h4>
+                            </div> 
+                            <ul style="list-style-type: disc; padding-left: 20px;">  <!-- Unordered list with bullet points -->
+                                <li><a href="#" class="link-primary link-underline-opacity-25 link-underline-opacity-100-hover" style="font-size: larger;">Episode 2</a></li>
+                                <li><a href="#" class="link-primary link-underline-opacity-25 link-underline-opacity-100-hover" style="font-size: larger;">Episode 3</a></li>
+                                <li><a href="#" class="link-primary link-underline-opacity-25 link-underline-opacity-100-hover" style="font-size: larger;">Episode 4</a></li>
+                                <li><a href="#" class="link-primary link-underline-opacity-25 link-underline-opacity-100-hover" style="font-size: larger;">Episode 5</a></li>
+                                <li><a href="#" class="link-primary link-underline-opacity-25 link-underline-opacity-100-hover" style="font-size: larger;">Episode 6</a></li>
+                                <li><a href="#" class="link-primary link-underline-opacity-25 link-underline-opacity-100-hover" style="font-size: larger;">Episode 7</a></li>
+                            </ul>
+                        </div>
+                        <div style="padding-top: 20px;">
+                            <button class="btn btn-outline-primary" type="submit" style="width: 250px;font-size: 1.25em;">
+                                Unduh Tayangan &nbsp
+                                <ion-icon name="cloud-download-outline" style="vertical-align: text-bottom;"></ion-icon>
+                            </button>
+                        </div>
+                        <div style="padding-top: 20px;">
+                            <button class="btn btn-outline-primary" type="submit" style="width: 250px;font-size: 1.25em;">
+                                Favorit Tayangan
+                                <ion-icon name="bookmark-outline" style="vertical-align: text-bottom;"></ion-icon>
+                            </button>
+                        </div>
+                        <div style="margin-top: 60px;">
+
+                        </div>
+                        <div class="left-container-card-data"> 
+                            <h5 class="text-secondary" style="margin-right: 15px;">Sinopsis Episode: </h5>
+                            <h5> Monica gets a new roommate </h5>
+                        </div> 
+                        <div class="left-container-card-data"> 
+                            <h5 class="text-secondary" style="margin-right: 15px;">Durasi Episode: </h5>
+                            <h5> 22</h5>
+                        </div> 
+                        <div class="left-container-card-data"> 
+                            <h5 class="text-secondary" style="margin-right: 15px;">URL Episode: </h5>
+                            <h5> https://www.pacilflix.com/watch/70274219?trackId=14170286</h5>
+                        </div> 
+                        <div class="left-container-card-data"> 
+                            <h5 class="text-secondary" style="margin-right: 15px;">Tanggal Rilis Episode: </h5>
+                            <h5> 1994-05-20</h5>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+
+</body>

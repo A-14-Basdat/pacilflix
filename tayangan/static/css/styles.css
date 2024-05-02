@@ -1,0 +1,155 @@
+.center-container {
+    display: flex;  /* Use flexbox for layout */
+    justify-content: center;  /* Horizontal centering */
+    align-items: center;  /* Vertical centering */
+    /* height: 20vh;   */
+    /* padding: 20px;   */
+    padding-top: 50px;
+    /* padding-bottom: 2px; */
+}
+
+.left-container {
+    display: flex;  /* Use flexbox for layout */
+    justify-content: flex-start;  /* Horizontal alignment to the left */
+    align-items: center;  /* Vertical centering */
+    padding-top: 20px;  /* Padding at the top */
+    padding-left: 20px;  /* Padding on the left for spacing */
+}
+
+.pilih-pembayaran-container {
+    display: flex;  /* Use flexbox for layout */
+    justify-content: center;  /* Horizontal alignment to the left */
+    align-items: center;  /* Vertical centering */
+    padding-top: 20px;  /* Padding at the top */
+}
+
+
+
+
+
+.d-flex {
+    width: 300px;  /* Control the width of the search field */
+    height: 60px;  /* Increase the height */
+    padding: 10px;  /* Add padding for better appearance */
+}
+
+.form-control::placeholder {
+    font-size: 1.25em;  /* Increase font size for placeholder */
+    color: #888;  /* Change placeholder text color */
+}
+
+
+
+
+.center-icon {
+    display: flex;  /* Use Flexbox */
+    justify-content: center;  /* Horizontal centering */
+    align-items: center;  /* Vertical centering */
+}
+
+.center-vertical {
+    height: 10px;
+    padding: 2px 2px;  
+    display: flex;
+    align-items: center;
+}
+
+
+.navbar {
+    padding-top: 5px;  /* Increase top padding */
+    padding-bottom: 5px;  /* Increase bottom padding */
+    font-size: 1.25rem;  /* Increase the font size */
+}
+
+/* Adjust the font size for specific navbar elements */
+.navbar-brand {
+    font-size: 1.5rem;  /* Larger font size for the brand */
+}
+
+.navbar-nav .nav-link {
+    font-size: 1.1rem;  /* Consistent font size for nav links */
+}
+
+.container-fluid {
+    padding-left: 100px;  /* Left padding for spacing */
+    padding-right: 100px;  /* Right padding for spacing */
+}
+
+
+
+
+
+.text-secondary-h1 {
+    color: rgb(89, 113, 113);  /* Secondary text color */
+    font-weight: bolder;  /* Make the text bold */
+    letter-spacing: -0.07em;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.text-secondary {
+    color: gray;  /* Secondary text color */
+    font-weight: bold;  /* Make the text bold */
+}
+
+
+.container-card {
+    width: 60%;  /* Use percentage to make it adaptive */
+    max-width: 75rem;  /* Set a maximum width for larger screens */
+    min-width: 20rem;  /* Set a minimum width for smaller screens */
+    border-radius: 30px;  /* Rounded corners */
+    border: 2px solid #cccccc;  /* Grey border */
+    margin-top: 40px;
+    margin-bottom: 80px;
+}
+
+.container-table {
+    width: 90%;  /* Use percentage to make it adaptive */
+    max-width: 75rem;  /* Set a maximum width for larger screens */
+    min-width: 20rem;  /* Set a minimum width for smaller screens */
+    border-radius: 30px;  /* Rounded corners */
+    border: 2px solid #cccccc;  /* Grey border */
+    margin-top: 0px;
+    margin-bottom: 20px;
+    padding-bottom: 60px;
+    padding-left: 50px;
+    padding-right: 50px;
+    margin-top: -20px;
+    margin-bottom: -20px;
+}
+
+.text-secondary-h1-card {
+    color: rgb(89, 113, 113);  /* Secondary text color */
+    font-weight: bolder;  /* Make the text bold */
+    letter-spacing: -0.07em;
+    padding-bottom: 50px;
+}
+
+.left-container-card {
+    display: flex;  /* Use flexbox for layout */
+    justify-content: flex-start;  /* Horizontal alignment to the left */
+    align-items: center;  /* Vertical centering */
+    padding-top: 20px;  /* Padding at the top */
+}
+
+.left-container-card-data {
+    display: flex;  /* Use flexbox for layout */
+    justify-content: flex-start;  /* Horizontal alignment to the left */
+    align-items: center;  /* Vertical centering */
+    padding-top: 7px;  /* Padding at the top */
+}
+
+
+
+.form-control::placeholder {
+    opacity: 0.7; /* Adjust the opacity as needed */
+}
+
+
+
+
+.my-buttons {
+    display: inline-grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 70px;
+  }
