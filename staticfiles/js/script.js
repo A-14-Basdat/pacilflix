@@ -30,3 +30,16 @@ $(document).ready(function() {
         }
     });
 });
+
+$(document).ready(function() {
+    new DataTable('#contributors', {
+        layout: {
+            topStart: null,
+            topEnd: null,
+            bottomStart:null,
+            bottomEnd: null,
+        },
+        paging: false,
+        pageLength: 50
+    });
+});
