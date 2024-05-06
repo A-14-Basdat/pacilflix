@@ -46,46 +46,30 @@
                 
                 
                 <div class="card container-table" style="padding-top: 50px;width:70%;">
-                    <table id="example" class="table table-striped" style="width:100%; border-radius: 55px;">
+                    <table id="contributors" class="table table-striped" style="width:100%; border-radius: 55px;">
                         <thead>
                             <tr>
+                                <th style="text-align: center;">Id</th>
                                 <th style="text-align: center;">Nama</th>
-                                <th style="text-align: center;">Tipe</th>
                                 <th style="text-align: center;">Jenis Kelamin</th>
                                 <th style="text-align: center;">Kewarganegaraan</th>
                             </tr>
                         </thead>
                         <tbody>
+                            {% for d in data %}
                             <tr>
-                                <td>Steven Spielberg</td>
-                                <td>Sutradara</td>
-                                <td>Laki-laki</td>
-                                <td>Amerika Serikat</td>
+                                <td>{{ d.id }}</td>
+                                <td>{{ d.nama }}</td>
+                                <td>
+                                    {% if d.jenis_kelamin == 0 %}
+                                        laki-laki
+                                    {% else %}
+                                        perempuan
+                                    {% endif %}
+                                </td>
+                                <td>{{ d.kewarganegaraan }}</td>
                             </tr>
-                            <tr>
-                                <td>David Fincher</td>
-                                <td>Sutradara</td>
-                                <td>Laki-laki</td>
-                                <td>Amerika Serikat</td>
-                            </tr>
-                            <tr>
-                                <td>Daniel Kaluuya</td>
-                                <td>Pemain</td>
-                                <td>Laki-laki</td>
-                                <td>Britania Raya</td>
-                            </tr>
-                            <tr>
-                                <td>Jennifer Aniston</td>
-                                <td>Pemain</td>
-                                <td>Perempuan</td>
-                                <td>Amerika Serikat</td>
-                            </tr>
-                            <tr>
-                                <td>Larry David</td>
-                                <td>Penulis Skenario</td>
-                                <td>Laki-laki</td>
-                                <td>Amerika Serikat</td>
-                            </tr>
+                            {% endfor %}
                         </tbody>
                     </table>
                 </div>
