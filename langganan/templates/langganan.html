@@ -75,39 +75,19 @@
                             </tr>
                         </thead>
                         <tbody>
+                            {% for d in data %}
                             <tr>
-                                <td>premium</td>
-                                <td>80000</td>
-                                <td>4000</td>
-                                <td>smart tv</td>
+                                <td>{{ d.nama }}</td>
+                                <td>{{ d.harga }}</td>
+                                <td>{{ d.resolusi_layar }}</td>
+                                <td>{{ d.string_agg }}</td>
                                 <td>
-                                    <button class="btn btn-outline-success col-10 mx-auto" type="submit">
+                                    <button class="btn btn-secondary col-10 mx-auto" type="submit">
                                         <ion-icon name="arrow-forward-outline"></ion-icon>
                                     </button>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>standard</td>
-                                <td>65000</td>
-                                <td>1080</td>
-                                <td>smart tv</td>
-                                <td>
-                                    <button class="btn btn-outline-success col-10 mx-auto" type="submit">
-                                        <ion-icon name="arrow-forward-outline"></ion-icon>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>basic</td>
-                                <td>50000</td>
-                                <td>720</td>
-                                <td>smart phone</td>
-                                <td>
-                                    <button class="btn btn-outline-success col-10 mx-auto" type="submit">
-                                        <ion-icon name="arrow-forward-outline"></ion-icon>
-                                    </button>
-                                </td>
-                            </tr>
+                            {% endfor %}
                         </tbody>
                     </table>
                 </div>
