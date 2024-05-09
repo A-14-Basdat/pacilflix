@@ -41,3 +41,53 @@ def show_contributor(request):
    
    return render(request, "contributor.html", context)
 
+def show_pemain(request):
+   print('masuk ke hsowpameins')
+   data = query(
+        f"""
+        SELECT c.id, c.nama, c.jenis_kelamin, c.kewarganegaraan
+        FROM contributors c
+        JOIN pemain p ON c.id = p.id;
+        """
+    )
+
+   context = {
+        "data": data
+    }
+   print(len(data))
+   
+   return render(request, "contributor.html", context)
+
+def show_penulis_skenario(request):
+
+   data = query(
+        f"""
+        SELECT c.id, c.nama, c.jenis_kelamin, c.kewarganegaraan
+        FROM contributors c
+        JOIN penulis_skenario ps ON c.id = ps.id;
+        """
+    )
+
+   context = {
+        "data": data
+    }
+   print(len(data))
+   
+   return render(request, "contributor.html", context)
+
+def show_sutradara(request):
+   data = query(
+        f"""
+        SELECT c.id, c.nama, c.jenis_kelamin, c.kewarganegaraan
+        FROM contributors c
+        JOIN sutradara s ON c.id = s.id;
+        """
+    )
+
+   context = {
+        "data": data
+    }
+   print(len(data))
+   
+   return render(request, "contributor.html", context)
+

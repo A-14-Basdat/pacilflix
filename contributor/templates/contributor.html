@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
-
 {% load static %}
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,6 +9,8 @@
     <meta charset="UTF-8">
     {% block meta %}
     <title>Contributor</title>
+    <script defer src="{%static 'js/contributor.js' %}"></script>
+
     {% endblock meta %}
 
     
@@ -27,19 +30,17 @@
         <div class="container my-5" w-10 pt-10 >
             
             <div style="margin-left: 20%; margin-right: 60%;">
-
-                <form >
-                    <h5 class="text-secondary" style="margin-left: 0px;"> Cari berdasarkan tipe:</h5>
-                    <div class="form-group">
-                        <select class="form-control" id="exampleFormControlSelect1" style="font-size: 1em;">
-                            <option>semua</option>
-                            <option>Pemain</option>
-                            <option>Penulis Skenario</option>
-                            <option>Sutradara</option>
-                        </select>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Cari berdasarkan tipe:
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="{% url 'contributor:show_contributor' %}">semua</a>
+                        <a class="dropdown-item" href="{% url 'contributor:show_pemain' %}">Pemain</a>
+                        <a class="dropdown-item" href="{% url 'contributor:show_penulis_skenario' %}">Penulis Skenario</a>
+                        <a class="dropdown-item" href="{% url 'contributor:show_sutradara' %}">Sutradara</a>
                     </div>
-
-                </form>
+                </div>
             </div>
 
             <div class="center-container">
