@@ -4,10 +4,6 @@ from django.db import connection
 from django.shortcuts import render, redirect
 from collections import namedtuple
 
-def show_beli(request):
-   return render(request, "beli.html")
-
-
 
 def map_cursor(cursor):
     description = cursor.description
@@ -32,7 +28,7 @@ def query(query_str: str):
     return result
 
 def show_langganan(request):
-   data = query(
+    pilihan = query(
         f"""
         SELECT nama, harga, resolusi_layar, STRING_AGG(dukungan_perangkat, ', ')
         FROM PAKET, DUKUNGAN_PERANGKAT
@@ -41,17 +37,89 @@ def show_langganan(request):
         """
     )
 
-   context = {
+    riwayat = query(
+        f"""
+        SELECT *
+        FROM TRANSACTION, PAKET
+        WHERE TRANSACTION.username = '{request.session["username"]}'
+        AND TRANSACTION.nama_paket = PAKET.nama
+        ;
+        """
+    )
+
+    aktif = query(
+        f"""
+        SELECT nama, harga, resolusi_layar, STRING_AGG(dukungan_perangkat, ', '), start_date_time, end_date_time
+        FROM TRANSACTION, PAKET, DUKUNGAN_PERANGKAT
+        WHERE TRANSACTION.username = '{request.session["username"]}'
+        AND end_date_time > CURRENT_DATE
+        AND start_date_time < CURRENT_DATE
+        AND PAKET.nama = DUKUNGAN_PERANGKAT.nama_paket
+        GROUP BY PAKET.nama, start_date_time, end_date_time;
+        """
+    )
+
+    context = {
+        "pilihan": pilihan,
+        "riwayat": riwayat,
+        "aktif": aktif
+    }
+    print(pilihan)
+    print(riwayat)
+    print(aktif)
+   
+    return render(request, "langganan.html", context)
+
+def show_beli_basic(request):
+    data = query(
+        f"""
+        SELECT nama, harga, resolusi_layar, STRING_AGG(dukungan_perangkat, ', ')
+        FROM PAKET, DUKUNGAN_PERANGKAT
+        WHERE PAKET.nama = 'basic'
+        AND PAKET.nama = DUKUNGAN_PERANGKAT.nama_paket
+        GROUP BY PAKET.nama;
+        """
+    )
+   
+    context = {
         "data": data
     }
-   print(data)
    
-   return render(request, "langganan.html", context)
+    print(data, 'ini basic')
+    return render(request, "beli.html", context)
 
-# SELECT P.id_brand, B.nama, STRING_AGG(BEL.nama, ', ') AS nama_pembeli
-# FROM PEMBELI BEL, BRAND B, PRODUK P, TRANSAKSI T, TRANSAKSI_PRODUK TP
-# WHERE BEL.id_pembeli = T.id_pembeli 
-# AND T.id_transaksi = TP. id_transaksi
-# AND TP.id_produk = P.id_produk
-# AND P.id_brand = B.id_brand
-# GROUP BY P.id_brand, B.nama;
+def show_beli_premium(request):
+    data = query(
+        f"""
+        SELECT nama, harga, resolusi_layar, STRING_AGG(dukungan_perangkat, ', ')
+        FROM PAKET, DUKUNGAN_PERANGKAT
+        WHERE PAKET.nama = 'premium'
+        AND PAKET.nama = DUKUNGAN_PERANGKAT.nama_paket
+        GROUP BY PAKET.nama;
+        """
+    )
+   
+    context = {
+        "data": data
+    }
+   
+    print(data, 'ini premium')
+    return render(request, "beli.html", context)
+
+def show_beli_standard(request):
+    data = query(
+        f"""
+        SELECT nama, harga, resolusi_layar, STRING_AGG(dukungan_perangkat, ', ')
+        FROM PAKET, DUKUNGAN_PERANGKAT
+        WHERE PAKET.nama = 'standard'
+        AND PAKET.nama = DUKUNGAN_PERANGKAT.nama_paket
+        GROUP BY PAKET.nama;
+        """
+    )
+   
+    context = {
+        "data": data
+    }
+   
+    print(data, 'ini standar')
+    return render(request, "beli.html", context)

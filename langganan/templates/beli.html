@@ -40,12 +40,14 @@
                             </tr>
                         </thead>
                         <tbody>
+                            {% for d in data %}
                             <tr>
-                                <td>premium</td>
-                                <td>80000</td>
-                                <td>4000</td>
-                                <td>smart tv</td>
+                                <td>{{ d.nama }}</td>
+                                <td>{{ d.harga }}</td>
+                                <td>{{ d.resolusi_layar }}</td>
+                                <td>{{ d.string_agg }}</td>
                             </tr>
+                            {% endfor %}
                         </tbody>
                     </table>
                 </div>

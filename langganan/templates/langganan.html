@@ -8,6 +8,8 @@
     <meta charset="UTF-8">
     {% block meta %}
     <title>Langganan</title>
+    <script defer src="{%static 'js/langganan.js' %}"></script>
+
     {% endblock meta %}
 
     
@@ -30,7 +32,7 @@
                     <div class="left-container">
                         <h3 class="text-secondary" style="margin-top: 30px; margin-left: 20px;"> Paket Langganan Aktif Anda</h3>
                     </div>
-                    <table id="example" class="table table-striped" style="width:100%; border-radius: 55px;">
+                    <table id="paketAktif" class="table table-striped" style="width:100%; border-radius: 55px;">
                         <thead>
                             <tr>
                                 <th style="text-align: center;">Nama</th>
@@ -42,15 +44,16 @@
                             </tr>
                         </thead>
                         <tbody>
+                            {% for a in aktif %}
                             <tr>
-                                <td>standard</td>
-                                <td>65000</td>
-                                <td>1080</td>
-                                <td>smart tv</td>
-                                <td>2024-04-29</td>
-                                <td>2024-05-30</td>
+                                <td>{{ a.nama }}</td>
+                                <td>{{ a.harga }}</td>
+                                <td>{{ a.resolusi_layar }}</td>
+                                <td>{{ a.string_agg }}</td>
+                                <td>{{ a.start_date_time }}</td>
+                                <td>{{ a.end_date_time }}</td>
                             </tr>
-                            
+                            {% endfor %}                            
                         </tbody>
                     </table>
                 </div>
@@ -64,7 +67,7 @@
                     <div class="left-container">  <!-- Container to center content -->
                         <h3 class="text-secondary" style="margin-top: 30px; margin-left: 20px;">Pilih Paket Lain</h3>  <!-- The centered heading -->
                     </div> 
-                    <table id="exampleFilm" class="table table-striped" style="width:100%">
+                    <table id="pilihanPaket" class="table table-striped" style="width:100%">
                         <thead>
                             <tr>
                                 <th style="text-align: center;">Nama</th>
@@ -75,16 +78,16 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {% for d in data %}
+                            {% for p in pilihan %}
                             <tr>
-                                <td>{{ d.nama }}</td>
-                                <td>{{ d.harga }}</td>
-                                <td>{{ d.resolusi_layar }}</td>
-                                <td>{{ d.string_agg }}</td>
+                                <td>{{ p.nama }}</td>
+                                <td>{{ p.harga }}</td>
+                                <td>{{ p.resolusi_layar }}</td>
+                                <td>{{ p.string_agg }}</td>
                                 <td>
-                                    <button class="btn btn-secondary col-10 mx-auto" type="submit">
+                                    <a href="{% url 'langganan:show_beli_'|add:p.nama %}" class="btn btn-secondary col-10 mx-auto" role="button">
                                         <ion-icon name="arrow-forward-outline"></ion-icon>
-                                    </button>
+                                    </a>
                                 </td>
                             </tr>
                             {% endfor %}
@@ -100,7 +103,7 @@
                     <div class="left-container">  <!-- Container to center content -->
                         <h3 class="text-secondary" style="margin-top: 30px; margin-left: 20px;">Riwayat Transaksi</h3>  <!-- The centered heading -->
                     </div> 
-                    <table id="exampleSeries" class="table table-striped" style="width:100%; border-radius: 55px;">
+                    <table id="riwayatPaket" class="table table-striped" style="width:100%; border-radius: 55px;">
                         <thead>
                             <tr>
                                 <th style="text-align: center;">Nama Paket</th>
@@ -112,15 +115,16 @@
                             </tr>
                         </thead>
                         <tbody>
+                            {% for r in riwayat %}
                             <tr>
-                                <td>standard</td>
-                                <td>2024-04-29</td>
-                                <td>2024-05-30</td>
-                                <td>Transfer Bank</td>
-                                <td>2024-04-29</td>
-                                <td>65000</td>
+                                <td>{{ r.nama_paket }}</td>
+                                <td>{{ r.start_date_time }}</td>
+                                <td>{{ r.end_date_time }}</td>
+                                <td>{{ r.metode_pembayaran }}</td>
+                                <td>{{ r.timestamp_pembayaran }}</td>
+                                <td>{{ r.harga }}</td>
                             </tr>
-                            
+                            {% endfor %}                            
                         </tbody>
                     </table>
                 </div>
