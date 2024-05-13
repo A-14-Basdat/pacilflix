@@ -1,5 +1,5 @@
 from django.urls import path
-from langganan.views import show_langganan, show_beli_basic, show_beli_premium, show_beli_standard
+from langganan.views import show_langganan, show_beli_basic, show_beli_premium, show_beli_standard, bayar
 
 app_name = 'langganan'
 
@@ -8,5 +8,6 @@ urlpatterns = [
     path('beli-premium', show_beli_premium, name='show_beli_premium'),
     path('beli-standard', show_beli_standard, name='show_beli_standard'),
     path('beli-basic', show_beli_basic, name='show_beli_basic'),
+    path('bayar', bayar, name='bayar'),
 
 ]
