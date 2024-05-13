@@ -7,7 +7,7 @@ $(document).ready(function() {
             bottomEnd: null,
         },
         "language": {
-            "emptyTable": "Tidak ada paket aktif"
+            "emptyTable": "-"
         },
         paging: false,
         pageLength: 50
@@ -36,7 +36,7 @@ $(document).ready(function() {
             bottomEnd: null,
         },
         "language": {
-            "emptyTable": "Tidak ada riwayat paket"
+            "emptyTable": "-"
         },
         paging: false,
         pageLength: 50
