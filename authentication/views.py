@@ -17,8 +17,8 @@ def register_user(request):
       form = UserCreationForm(request.POST)
       if form.is_valid():
          form.save()
-         message.success(request, 'Your account has been successfully created!')
-         return redirect('main:login')
+         messages.success(request, 'Your account has been successfully created!')
+         return redirect('authentication:login')
    context = {'form' : form}
    return render(request, "register.html")
 
@@ -68,5 +68,4 @@ def authentication_user(request):
 
 def logout_user(request):
     logout(request)
-    return redirect('main:login')
-# Th3Q!ckF0x
+    return redirect('authentication:login')
