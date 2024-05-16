@@ -33,9 +33,11 @@ def show_contributor(request):
         FROM contributors;
         """
     )
+   heading = 'Semua Kontributor'
 
    context = {
-        "data": data
+        "data": data,
+        "heading": heading
     }
    print(len(data))
    
@@ -50,11 +52,14 @@ def show_pemain(request):
         JOIN pemain p ON c.id = p.id;
         """
     )
+   heading = 'Pemain'
 
    context = {
-        "data": data
+        "data": data,
+        "heading": heading
     }
    print(len(data))
+   print(heading)
    
    return render(request, "contributor.html", context)
 
@@ -67,9 +72,11 @@ def show_penulis_skenario(request):
         JOIN penulis_skenario ps ON c.id = ps.id;
         """
     )
+   heading = 'Penulis Skenario'
 
    context = {
-        "data": data
+        "data": data,
+        "heading": heading
     }
    print(len(data))
    
@@ -83,9 +90,11 @@ def show_sutradara(request):
         JOIN sutradara s ON c.id = s.id;
         """
     )
+   heading = 'Sutradara'
 
    context = {
-        "data": data
+        "data": data,
+        "heading": heading
     }
    print(len(data))
    
