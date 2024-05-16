@@ -83,10 +83,10 @@ WSGI_APPLICATION = 'pacilflix.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'pacilflix', 
-        'USER': 'postgres',
-        'PASSWORD': 'abisatyo01',
-        'HOST': '127.0.0.1', 
+        'NAME': 'postgres', 
+        'USER': 'postgres.ctbvstxphbfdrpuarhml',
+        'PASSWORD': '456basdaters',
+        'HOST': 'aws-0-ap-southeast-1.pooler.supabase.com', 
         'PORT': '5432',
     }
 }
