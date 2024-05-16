@@ -5,10 +5,21 @@ from collections import namedtuple
 from django.contrib import messages
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import authenticate, login
-
-
+from django.shortcuts import redirect
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib import messages  
+from django.contrib.auth import logout
 
 def register_user(request):
+   form = UserCreationForm()
+
+   if request.method == "POST" :
+      form = UserCreationForm(request.POST)
+      if form.is_valid():
+         form.save()
+         message.success(request, 'Your account has been successfully created!')
+         return redirect('main:login')
+   context = {'form' : form}
    return render(request, "register.html")
 
 @csrf_exempt
@@ -55,4 +66,7 @@ def login_user(request):
 def authentication_user(request):
    return render(request, "authentication.html")
 
+def logout_user(request):
+    logout(request)
+    return redirect('main:login')
 # Th3Q!ckF0x
