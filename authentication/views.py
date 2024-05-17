@@ -14,26 +14,55 @@ from django.db import IntegrityError
 from django.db import connection, InternalError
 
 
-
 def register_user(request):
     if request.method == 'POST':
-        username = request.POST.get('username') # PK
-        password = request.POST.get('password') # NOT NULL
-        negara_asal = request.POST.get('negara_asal') # NOT NULL
-        cursor = connection.cursor() 
-        query = f"""
-        INSERT INTO PENGGUNA VALUES ('{username}', '{password}', '{negara_asal}');
-        
-        """   
-        print("ini query " + query)
-        try:
-            cursor.execute('set search_path to public')
-            cursor.execute(query)
-            return redirect('/authentication/login')
-        except InternalError as e: 
-            messages.info(request, str(e.args))
-            
+        username = request.POST.get('username')  # PK
+        password = request.POST.get('password')  # NOT NULL
+        negara_asal = request.POST.get('negara_asal')  # NOT NULL
+
+        cursor = connection.cursor()
+
+        # Check if username already exists
+        check_query = f"SELECT COUNT(*) FROM PENGGUNA WHERE username = '{username}';"
+        cursor.execute(check_query)
+        user_count = cursor.fetchone()[0]
+
+        if user_count > 0:
+            messages.error(request, "Username already exists. Please choose a different username.")
+        else:
+            insert_query = f"""
+            INSERT INTO PENGGUNA (username, password, negara_asal) 
+            VALUES ('{username}', '{password}', '{negara_asal}');
+            """
+            try:
+                cursor.execute('set search_path to public')
+                cursor.execute(insert_query)
+                return redirect('/authentication/login')
+            except IntegrityError as e:
+                messages.error(request, "An error occurred during registration. Please try again.")
+            except Exception as e:
+                messages.error(request, str(e))
+
     return render(request, 'register.html')
+
+# def register_user(request):
+#     if request.method == 'POST':
+#         username = request.POST.get('username') # PK
+#         password = request.POST.get('password') # NOT NULL
+#         negara_asal = request.POST.get('negara_asal') # NOT NULL
+#         cursor = connection.cursor() 
+#         query = f"""
+#         INSERT INTO PENGGUNA VALUES ('{username}', '{password}', '{negara_asal}');
+        
+#         """   
+#         try:
+#             cursor.execute('set search_path to public')
+#             cursor.execute(query)
+#             return redirect('/authentication/login')
+#         except InternalError as e: 
+#             messages.info(request, str(e.args))
+            
+#     return render(request, 'register.html')
 
 @csrf_exempt
 def login_user(request):
@@ -51,21 +80,19 @@ def login_user(request):
                """,
                [username, password],
          )
-         print('bubu')
 
       except Exception as e:
          cursor = connection.cursor()
-         print('blabla')
       response = cursor.fetchone()
       print(response)
       if response is not None:
          request.session["username"] = response[0]
          request.session["password"] = response[1]
          request.session["is_authenticated"] = True
-         print(request, "sfsd")
          print(request.session)
          for key, value in request.session.items():
             print(f"{key}: {value}")  # Print session keys and values for debugging
+
          # save in session
          request.session.save()
          print('sukses')
