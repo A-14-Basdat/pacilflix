@@ -9,19 +9,56 @@ from django.shortcuts import redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages  
 from django.contrib.auth import logout as auth_logout
+from django.contrib.auth.forms import UserCreationForm
+from django.db import IntegrityError
 
+# def register_user(request):
+#    form = UserCreationForm()
+
+#    if request.method == "POST" :
+#       form = UserCreationForm(request.POST)
+#       if form.is_valid():
+#          form.save()
+#          messages.success(request, 'Your account has been successfully created!')
+#          return redirect('authentication:login_user')
+#    context = {'form' : form}
+#    return render(request, "register.html")
+
+# def register_user(request):
+#     form = UserCreationForm()
+
+#     if request.method == "POST":
+#         form = UserCreationForm(request.POST)
+#         if form.is_valid():
+#             try:
+#                 form.save()
+#                 messages.success(request, 'Your account has been successfully created!')
+#                 return redirect('authentication:login_user')
+#             except IntegrityError:
+#                 messages.error(request, 'Username sudah digunakan. Silakan coba username lain.')
+
+#     context = {'form': form}
+#     return render(request, "register.html", context)
 
 def register_user(request):
-   form = UserCreationForm()
-
-   if request.method == "POST" :
-      form = UserCreationForm(request.POST)
-      if form.is_valid():
-         form.save()
-         messages.success(request, 'Your account has been successfully created!')
-         return redirect('authentication:login_user')
-   context = {'form' : form}
-   return render(request, "register.html")
+    if request.method == 'POST':
+        username = request.POST.get('username') # PK
+        password = request.POST.get('password') # NOT NULL
+        negara_asal = request.POST.get('negara_asal') # NOT NULL
+        cursor = connection.cursor() 
+        query = f"""
+        INSERT INTO USER_SYSTEM VALUES ('{username}', '{password}', '{negara_asal});
+        
+        """   
+        print("ini query " + query)
+      #   try:
+      #       cursor.execute('set search_path to public')
+      #       cursor.execute(query)
+      #       return redirect('authentication:login')
+      #   except InternalError as e: 
+      #       messages.info(request, str(e.args))
+            
+    return render(request, 'register.html')
 
 @csrf_exempt
 def login_user(request):
@@ -67,8 +104,14 @@ def login_user(request):
 def authentication_user(request):
    return render(request, "authentication.html")
 
+
+# def logout_user(request):
+#     request.session['username'] = 'not found'
+#     response = HttpResponseRedirect(reverse('authentication:authentication_user'))
+#     return response
+
 def logout_user(request):
-    print("Logging out....")
-    auth_logout(request)
-    print("Logged out successfully.")
-    return redirect('authentication:authentication_user')
+    del request.session["username"]
+    del request.session["password"]
+    del request.session["is_authenticated"]
+    return redirect("/authentication")
