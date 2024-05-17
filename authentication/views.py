@@ -55,4 +55,10 @@ def login_user(request):
 def authentication_user(request):
    return render(request, "authentication.html")
 
+def logout_user(request):
+    del request.session["username"]
+    del request.session["password"]
+    del request.session["is_authenticated"]
+    return redirect("/authentication")
+
 # Th3Q!ckF0x
