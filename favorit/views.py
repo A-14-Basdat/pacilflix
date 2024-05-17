@@ -20,6 +20,7 @@ def show_favorit(request):
 def hapus_favorit(request):
     if request.method == 'POST':
         judul = request.POST.get('judul')
+        print(judul+"heheh")
         with connection.cursor() as cursor:
             cursor.execute("DELETE FROM DAFTAR_FAVORIT WHERE judul = %s", [judul])
         return HttpResponseRedirect(reverse('favorit:show_favorit'))

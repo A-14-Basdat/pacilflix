@@ -24,10 +24,10 @@
                     <table id="example" class="table table-striped" style="width:100%; border-radius: 55px;">
                         <thead>
                             <tr>
-                                <th style="text-align: center;">Waktu Ditambahkan</th>
-                                <th style="text-align: center;"></th>
                                 <th style="text-align: center;">Judul</th>
+                                <th style="text-align: center;">Waktu Ditambahkan</th>
                                 <th style="text-align: center;">Aksi</th>
+                             
                             </tr>
                         </thead>
                         <tbody>
@@ -35,11 +35,10 @@
                             <tr>
                                 <td>{{ favorit.0 }}</td>
                                 <td>{{ favorit.1|date:"d/m/Y H:i" }}</td>
-                                <td>{{ favorit.2 }}</td>
                                 <td>
                                     <form action="{% url 'favorit:hapus_favorit' %}" method="post" style="margin: 0;">
                                         {% csrf_token %}
-                                        <input type="hidden" name="judul" value="{{ favorit.2 }}">
+                                        <input type="hidden" name="judul" value="{{ favorit.0 }}">
                                         <button type="submit" class="btn btn-danger" style="height: 33px;">
                                             <ion-icon name="trash-outline"></ion-icon>
                                         </button>

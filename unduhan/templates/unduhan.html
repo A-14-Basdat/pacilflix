@@ -37,9 +37,13 @@
                                 <td>{{ download.1 }}</td>
                                 <td>{{ download.2|date:"d/m/Y H:i:s" }}</td>
                                 <td>
-                                    <button class="btn btn-danger col-10 mx-auto" style="height: 33px;" type="submit">
-                                        <ion-icon name="trash-outline"></ion-icon>
-                                    </button>
+                                    <form action="{% url 'unduhan:delete_tayangan_terunduh' %}" method="post" style="margin: 0;">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="id_tayangan" value="{{ download.0 }}">
+                                        <button type="submit" class="btn btn-danger" style="height: 33px;">
+                                            <ion-icon name="trash-outline"></ion-icon>
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                             {% empty %}
