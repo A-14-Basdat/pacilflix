@@ -6,86 +6,47 @@
 
 <head>
     <meta charset="UTF-8">
-    {% block meta %}
-    <script defer src="{%static 'js/unduhan.js' %}"></script>
-
     <title>Unduhan</title>
-    {% endblock meta %}
-
-    
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 
 <body>
-
     {% block content %}
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <div class="container" style="margin-bottom: 100px;">
-        <div class="center-container">  <!-- Container to center content -->
-            <h1 class="text-secondary-h1">DAFTAR &nbsp UNDUHAN</h1>  <!-- The centered heading -->
+        <div class="center-container">
+            <h1 class="text-secondary-h1">DAFTAR &nbsp UNDUHAN</h1>
         </div>    
     
-        
-        <div class="container my-5" w-10 pt-10 >
+        <div class="container my-5">
             <div class="center-container">
-                
                 <div class="card container-table" style="padding-top: 50px;width:70%;">
                     <div class="left-container">
-                        <h3 class="text-secondary" style="margin-left: 20px;">Daftar Unduhan A</h3>
+                        <h3 class="text-secondary" style="margin-left: 20px;">Daftar Unduhan Anda</h3>
                     </div>
                     <table id="unduhan" class="table table-striped" style="width:100%; border-radius: 55px;">
                         <thead>
                             <tr>
                                 <th style="text-align: center;">Judul</th>
                                 <th style="text-align: center;">Waktu Diunduh</th>
-                                <th style="text-align: center; padding-left: 15px; padding-right: 25px;">Aksi</th>
+                                <th style="text-align: center;">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
+                            {% for download in downloads %}
                             <tr>
-                                <td>Fight Club</td>
-                                <td>4/18/2024 9:25:17</td>
+                                <td>{{ download.1 }}</td>
+                                <td>{{ download.2|date:"d/m/Y H:i:s" }}</td>
                                 <td>
                                     <button class="btn btn-danger col-10 mx-auto" style="height: 33px;" type="submit">
                                         <ion-icon name="trash-outline"></ion-icon>
                                     </button>
                                 </td>
                             </tr>
+                            {% empty %}
                             <tr>
-                                <td>Suits</td>
-                                <td>4/19/2024 9:47:27</td>
-                                <td>
-                                    <button class="btn btn-danger col-10 mx-auto" style="height: 33px;" type="submit">
-                                        <ion-icon name="trash-outline"></ion-icon>
-                                    </button>
-                                </td>
+                                <td colspan="3">Tidak ada data unduhan.</td>
                             </tr>
-                            <tr>
-                                <td>The Social Network</td>
-                                <td>4/10/2024 16:45:27</td>
-                                <td>
-                                    <button class="btn btn-danger col-10 mx-auto" style="height: 33px;" type="submit">
-                                        <ion-icon name="trash-outline"></ion-icon>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Ada Apa Dengan Cinta?</td>
-                                <td>4/12/2024 14:47:10</td>
-                                <td>
-                                    <button class="btn btn-danger col-10 mx-auto" style="height: 33px;" type="submit">
-                                        <ion-icon name="trash-outline"></ion-icon>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Gie</td>
-                                <td>4/14/2024 12:01:33</td>
-                                <td>
-                                    <button class="btn btn-danger col-10 mx-auto" style="height: 33px;" type="submit">
-                                        <ion-icon name="trash-outline"></ion-icon>
-                                    </button>
-                                </td>
-                            </tr>
+                            {% endfor %}
                         </tbody>
                     </table>
                 </div>
@@ -94,3 +55,4 @@
     </div>
     {% endblock %}
 </body>
+</html>
