@@ -9,7 +9,7 @@ $(document).ready(function() {
         paging: false,
         pageLength: 50
     });
-});
+});  
 
 document.addEventListener("DOMContentLoaded", function() {
     // Get the dropdown button element

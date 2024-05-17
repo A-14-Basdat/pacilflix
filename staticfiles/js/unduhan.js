@@ -7,6 +7,9 @@ $(document).ready(function() {
             bottomEnd: null,
         },
         paging: false,
-        pageLength: 50
+        pageLength: 50,
+        "columnDefs": [
+            { "orderable": false, "targets": 2 }
+        ]
     });
 });  
