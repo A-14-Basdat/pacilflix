@@ -1,34 +1,25 @@
 {% extends 'base.html' %}
 
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    {% block meta %}
     <title>Tayangan</title>
-    {% endblock meta %}
-
-    
-</head>
-
-<body>
-
-    {% block content %}
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    {% block content %}
     <div class="container" style="margin-bottom: 100px;">
-        <div class="center-container">  <!-- Container to center content -->
-            <h1 class="text-secondary-h1">DAFTAR &nbsp FAVORIT</h1>  <!-- The centered heading -->
-        </div>    
-    
-        
-        <div class="container my-5" w-10 pt-10 >
+        <div class="center-container">
+            <h1 class="text-secondary-h1">DAFTAR FAVORIT</h1>
+        </div>
+        <div class="container my-5">
             <div class="center-container">
-                
                 <div class="card container-table" style="padding-top: 50px;width:70%;">
                     <div class="left-container">
-                        <h3 class="text-secondary" style="margin-left: 20px;">Daftar Favorit A</h3>
+                        <h3 class="text-secondary" style="margin-left: 20px;">Daftar Favorit Anda</h3>
                     </div>
                     <table id="example" class="table table-striped" style="width:100%; border-radius: 55px;">
                         <thead>
@@ -36,59 +27,35 @@
                                 <th style="text-align: center;">Judul</th>
                                 <th style="text-align: center;">Waktu Ditambahkan</th>
                                 <th style="text-align: center;">Aksi</th>
+                             
                             </tr>
                         </thead>
                         <tbody>
+                            {% for favorit in favorits %}
                             <tr>
-                                <td>Fight Club</td>
-                                <td>4/18/2024 9:25:17</td>
+                                <td>{{ favorit.0 }}</td>
+                                <td>{{ favorit.1|date:"d/m/Y H:i" }}</td>
                                 <td>
-                                    <button class="btn btn-danger col-10 mx-auto" style="height: 33px;" type="submit">
-                                        <ion-icon name="trash-outline"></ion-icon>
-                                    </button>
+                                    <form action="{% url 'favorit:hapus_favorit' %}" method="post" style="margin: 0;">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="judul" value="{{ favorit.0 }}">
+                                        <button type="submit" class="btn btn-danger" style="height: 33px;">
+                                            <ion-icon name="trash-outline"></ion-icon>
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
+                            {% empty %}
                             <tr>
-                                <td>Suits</td>
-                                <td>4/19/2024 9:47:27</td>
-                                <td>
-                                    <button class="btn btn-danger col-10 mx-auto" style="height: 33px;" type="submit">
-                                        <ion-icon name="trash-outline"></ion-icon>
-                                    </button>
-                                </td>
+                                <td colspan="4">Tidak ada data favorit.</td>
                             </tr>
-                            <tr>
-                                <td>The Social Network</td>
-                                <td>4/10/2024 16:45:27</td>
-                                <td>
-                                    <button class="btn btn-danger col-10 mx-auto" style="height: 33px;" type="submit">
-                                        <ion-icon name="trash-outline"></ion-icon>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Ada Apa Dengan Cinta?</td>
-                                <td>4/12/2024 14:47:10</td>
-                                <td>
-                                    <button class="btn btn-danger col-10 mx-auto" style="height: 33px;" type="submit">
-                                        <ion-icon name="trash-outline"></ion-icon>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Gie</td>
-                                <td>4/14/2024 12:01:33</td>
-                                <td>
-                                    <button class="btn btn-danger col-10 mx-auto" style="height: 33px;" type="submit">
-                                        <ion-icon name="trash-outline"></ion-icon>
-                                    </button>
-                                </td>
-                            </tr>
+                            {% endfor %}
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
-    </div>    
+    </div>
     {% endblock %}
 </body>
+</html>
