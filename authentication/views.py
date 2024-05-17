@@ -8,7 +8,8 @@ from django.contrib.auth import authenticate, login
 from django.shortcuts import redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages  
-from django.contrib.auth import logout
+from django.contrib.auth import logout as auth_logout
+
 
 def register_user(request):
    form = UserCreationForm()
@@ -18,7 +19,7 @@ def register_user(request):
       if form.is_valid():
          form.save()
          messages.success(request, 'Your account has been successfully created!')
-         return redirect('authentication:login')
+         return redirect('authentication:login_user')
    context = {'form' : form}
    return render(request, "register.html")
 
@@ -67,5 +68,7 @@ def authentication_user(request):
    return render(request, "authentication.html")
 
 def logout_user(request):
-    logout(request)
-    return redirect('authentication:login')
+    print("Logging out....")
+    auth_logout(request)
+    print("Logged out successfully.")
+    return redirect('authentication:authentication_user')
