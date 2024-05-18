@@ -138,36 +138,55 @@
                 <h1 class="text-secondary-h1">BAGIAN &nbsp ULASAN</h1>  <!-- The centered heading -->
             </div>  
             <div class="container my-5" style="padding-left: 200px; padding-right: 200px;">
-                <form>
-                    <div class="form-group">
-                        <label for="exampleFormControlTextarea1" style="font-size: 1.25em; margin-bottom: 20px;">Deskripsi Ulasan</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" style="font-size: 1.25em;"></textarea>
-                    </div>
-                    <div style="margin-bottom: 30px;">
-
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleFormControlSelect1" style="font-size: 1.25em; margin-bottom: 20px;">Rating</label>
-                        <select class="form-control" id="exampleFormControlSelect1" style="font-size: 1.25em;">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                            <option>6</option>
-                            <option>7</option>
-                            <option>8</option>
-                            <option>9</option>
-                            <option>10</option>
+                {% for s in series %}
+                <form method="POST" action="{% url 'tayangan:create_review' s.id %}">
+                    {% csrf_token %}
+                    <!-- <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="username" name="username" required>
+                    </div> -->
+                    <div class="mb-3">
+                        <label for="rating" class="form-label">Rating</label>
+                        <select class="form-control" id="rating" name="rating" required>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="5">6</option>
+                            <option value="5">7</option>
+                            <option value="5">8</option>
+                            <option value="5">9</option>
+                            <option value="5">10</option>
                         </select>
                     </div>
-                    <div style="margin-top: 30px; margin-bottom: 30px;">
-                        <button class="btn btn-secondary" type="submit" style="width: 100%;font-size: 1.25em;">
-                            Submit Ulasan
-                        </button>
+                    <div class="mb-3">
+                        <label for="deskripsi" class="form-label">Deskripsi</label>
+                        <textarea class="form-control" id="deskripsi" name="deskripsi" rows="3" required></textarea>
                     </div>
+                    <button class="btn btn-secondary" type="submit" style="width: 100%;font-size: 1.25em;">
+                        Submit Ulasan
+                    </button>
                 </form>
+                {% endfor %}
             </div>
+            {% if messages %}
+            <div class="container mt-4">
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
+                        <ul class="list-group">
+                            {% for message in messages %}
+                            <li class="list-group-item{% if 'ulasan' in message.tags %} list-group-item-success{% endif %}
+                                {% if 'error' in message.tags %} list-group-item-danger{% endif %}
+                                {% if 'success' in message.tags %} list-group-item-success{% endif %}">
+                                {{ message }}
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
             
             <div class="container my-5" w-10>
                 <div class="center-container">
@@ -179,7 +198,7 @@
                         <table id="example" class="table table-striped" style="width:100%; border-radius: 55px;">
                             <thead>
                                 <tr>
-                                    <th style="text-align: center;">id_tayangan</th>
+                                    <!-- <th style="text-align: center;">id_tayangan</th> -->
                                     <th style="text-align: center;">Nama</th>
                                     <th style="text-align: center;">Waktu</th>
                                     <th style="text-align: center;">Rating</th>
@@ -187,13 +206,14 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                {% for r in reviews %}
                                 <tr>
-                                    <td>d2718217-0546-4b92-9c3f-4e71b31d85d8</td>
-                                    <td>budibudiman22</td>
-                                    <td>4/21/2024 10:47:27</td>
-                                    <td>9</td>
-                                    <td>Lucu banget</td>
+                                    <td>{{ r.username }}</td>
+                                    <td>{{ r.timestamp }}</td>
+                                    <td>{{ r.rating }}</td>
+                                    <td>{{ r.deskripsi }}</td>
                                 </tr>
+                                {% endfor %}
                             </tbody>
                         </table>
                     </div>

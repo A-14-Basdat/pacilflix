@@ -31,7 +31,19 @@
             </div>
 
             {% if no_results_message %}
-                <p>{{ no_results_message }}</p>
+                
+                <div class="container my-5">
+                    <div class="center-container">
+                        <div class="card container-table">
+                            <div class="left-container">
+                                <h3 class="text-secondary" style="margin-top: 30px; margin-left: 20px;">Hasil Pencarian</h3>
+                            </div>
+                            <table class="table table-striped" style="width:100%">
+                                <p>{{ no_results_message }}</p>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             {% endif %}
     
             <!-- Search Results Section -->

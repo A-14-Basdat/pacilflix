@@ -1,6 +1,8 @@
+from datetime import datetime
+from django.contrib import messages
 import uuid
-from django.db import connection
-from django.http import HttpResponse
+from django.db import InternalError, connection
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from collections import namedtuple
 
@@ -327,172 +329,50 @@ def detail_episode(request, series_id, episode_judul):
         })
 
 def detail_tayangan(request, id):
-    tayangan_type = get_tayangan_type(id)  # Anda perlu mengganti ini dengan cara Anda untuk mendapatkan tipe tayangan
-
+    id = str(id)  # Convert UUID to string for the query
+    tayangan_type = get_tayangan_type(id)
+    
     if tayangan_type == 'film':
-        id = str(id)  # Convert UUID to string for the query
-        film = query("""
-            SELECT T.id, T.judul, T.sinopsis, F.durasi_film, F.release_date_film, F.url_video_film, T.asal_negara
-            FROM TAYANGAN T
-            JOIN FILM F ON T.id = F.id_tayangan
-            WHERE id = %s
-        """, [str(id)])
-        #film = cursor.fetchone()
-
-        genres = query("""
-            SELECT GT.genre
-            FROM GENRE_TAYANGAN GT
-            WHERE GT.id_tayangan = %s
-        """, [str(id)])
-        #genres = cursor.fetchall()
-        genre_list = [genre[0] for genre in genres]
-        #if len(genre_list) > 1:
-        if genre_list:
-            genre_list = genre_list[0].split(', ')
-        else:
-            genre_list = [] 
-
-        actors = query("""
-            SELECT C.nama FROM CONTRIBUTORS C
-            JOIN MEMAINKAN_TAYANGAN MT ON MT.id_pemain = C.id 
-            JOIN TAYANGAN T ON T.id = MT.id_tayangan
-            WHERE T.id = %s
-        """, [str(id)])
-        #actors = cursor.fetchall()
-        actor_list = [actor[0] for actor in actors]
-
-        writers = query("""
-            SELECT C.nama FROM CONTRIBUTORS C
-            JOIN MENULIS_SKENARIO_TAYANGAN MST ON MST.id_penulis_skenario = C.id 
-            JOIN TAYANGAN T ON T.id = MST.id_tayangan
-            WHERE T.id = %s
-        """, [str(id)])
-        #writers = cursor.fetchall()
-        writer_list = [writer[0] for writer in writers]
-
-        director = query("""
-            SELECT S.id, C.nama
-            FROM SUTRADARA S
-            JOIN CONTRIBUTORS C ON C.id = S.id
-            JOIN TAYANGAN T ON T.id_sutradara = S.id WHERE T.id = %s
-        """, [str(id)])
-        #director = cursor.fetchone()
-
-        # Fetch reviews for the selected film
-        reviews = query("""
-            SELECT username, timestamp, rating, deskripsi
-            FROM ULASAN
-            WHERE id_tayangan = %s
-        """, [str(id)])
-
-        total_ratings = sum(review.rating for review in reviews)
-        average_rating = total_ratings / len(reviews) if reviews else 0
-
-        # Count the total views of the selected film
-        total_views = query("""
-            SELECT COUNT(*)
-            FROM RIWAYAT_NONTON
-            WHERE id_tayangan = %s
-            AND EXTRACT(EPOCH FROM (end_date_time - start_date_time)) / 60 >= 0.7 * (
-                SELECT durasi_film FROM FILM WHERE id_tayangan = %s
-            )
-        """, [str(id), str(id)])
-        total_views = total_views[0][0] if total_views else 0
-
-        print(film, genre_list, actor_list, writer_list, director, reviews, total_views)
-
-        return render(request, 'film.html', {
-            'film': film,
-            'genre_list': genre_list,
-            'actor_list': actor_list,
-            'writer_list': writer_list,
-            'director': director,
-            'reviews' : reviews,
-            'average_rating': average_rating,
-            'total_views' : total_views
-            })
+        return detail_film(request, id)
+    elif tayangan_type == 'series':
+        return detail_series(request, id)
     else:
-        id = str(id)  # Convert UUID to string for the query
-        series = query("""
-            SELECT T.id, T.judul, T.sinopsis, T.asal_negara, 
-                array_agg(E.id_series) as episode_ids,
-                array_agg(E.sub_judul) as episode_titles
-            FROM TAYANGAN T
-            JOIN SERIES S ON T.id = S.id_tayangan
-            JOIN EPISODE E ON S.id_tayangan = E.id_series
-            WHERE T.id = %s
-            GROUP BY T.id, T.judul, T.sinopsis, T.asal_negara
-        """, [str(id)])
+        return HttpResponse("Tayangan not found", status=404)
+    
+def create_review(request, id):
+    
+    if request.method == 'POST':
+        username = request.session.get("username")
+        rating = request.POST.get('rating')
+        deskripsi = request.POST.get('deskripsi')
+        timestamp = datetime.now()
 
-        #film = cursor.fetchone()
+        if  not rating or not deskripsi:
+            messages.error(request, 'All fields are required.')
+            print("error, gagal")
+            return HttpResponseRedirect(f'/tayangan/{id}')
+        
+        try:
+            with connection.cursor() as cursor:
+                
+                cursor.execute("""
+                    INSERT INTO ULASAN (username, timestamp, rating, deskripsi, id_tayangan)
+                    VALUES (%s, %s, %s, %s, %s)
+                """, [username, timestamp, rating, deskripsi, id])
+                print("horee bisa")
+                messages.add_message(request, messages.SUCCESS, 'Ulasan anda berhasil ditambahkan!', extra_tags='ulasan')
 
-        genres = query("""
-            SELECT GT.genre
-            FROM GENRE_TAYANGAN GT
-            WHERE GT.id_tayangan = %s
-        """, [str(id)])
-        #genres = cursor.fetchall()
-        genre_list = [genre[0] for genre in genres]
-        if genre_list:
-            genre_list = genre_list[0].split(', ')
+        except InternalError as e:
+            print("error lagi woi")
+            
+            messages.add_message(request, messages.ERROR, f"Anda sudah memberikan ulasan untuk tayangan ini!", extra_tags='ulasan')
+        
+        tayangan_type = get_tayangan_type(id)
+        if tayangan_type == 'film':
+            return HttpResponseRedirect(f'/tayangan/{id}')
+        elif tayangan_type == 'series':
+            return HttpResponseRedirect(f'/tayangan/{id}')
         else:
-            genre_list = [] 
+            return HttpResponse("Tayangan not found", status=404)
 
-        actors = query("""
-            SELECT C.nama FROM CONTRIBUTORS C
-            JOIN MEMAINKAN_TAYANGAN MT ON MT.id_pemain = C.id 
-            JOIN TAYANGAN T ON T.id = MT.id_tayangan
-            WHERE T.id = %s
-        """, [str(id)])
-        #actors = cursor.fetchall()
-        actor_list = [actor[0] for actor in actors]
-
-        writers = query("""
-            SELECT C.nama FROM CONTRIBUTORS C
-            JOIN MENULIS_SKENARIO_TAYANGAN MST ON MST.id_penulis_skenario = C.id 
-            JOIN TAYANGAN T ON T.id = MST.id_tayangan
-            WHERE T.id = %s
-        """, [str(id)])
-        #writers = cursor.fetchall()
-        writer_list = [writer[0] for writer in writers]
-
-        director = query("""
-            SELECT S.id, C.nama
-            FROM SUTRADARA S
-            JOIN CONTRIBUTORS C ON C.id = S.id
-            JOIN TAYANGAN T ON T.id_sutradara = S.id WHERE T.id = %s
-        """, [str(id)])
-        #director = cursor.fetchone()
-
-        # Fetch reviews for the selected film
-        reviews = query("""
-            SELECT username, timestamp, rating, deskripsi
-            FROM ULASAN
-            WHERE id_tayangan = %s
-        """, [str(id)])
-
-        total_ratings = sum(review.rating for review in reviews)
-        average_rating = total_ratings / len(reviews) if reviews else 0
-
-        # Count the total views of the selected series based on episode duration
-        total_views = query("""
-            SELECT COUNT(*)
-            FROM RIWAYAT_NONTON RN
-            JOIN EPISODE E ON RN.id_tayangan = E.id_series
-            WHERE E.id_series = %s
-            AND EXTRACT(EPOCH FROM (RN.end_date_time - RN.start_date_time)) / 60 >= 0.7 * E.durasi
-        """, [str(id)])
-        total_views = total_views[0][0] if total_views else 0
-
-        print(series, genre_list, actor_list, writer_list, director, reviews, total_views)
-        return render(request, 'series.html', {
-            'series': series,
-            'genre_list': genre_list,
-            'actor_list': actor_list,
-            'writer_list': writer_list,
-            'director': director,
-            'reviews' : reviews,
-            'average_rating': average_rating,
-            'total_views' : total_views
-            })
-  
+    return HttpResponseRedirect(f'/tayangan')
