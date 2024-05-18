@@ -109,12 +109,12 @@ def show_main(request):
 def get_tayangan_type(tayangan_id):
  
     # Query untuk memeriksa apakah tayangan adalah film
-    is_film = query("SELECT id FROM FILM WHERE id_tayangan = %s", [str(tayangan_id)])
+    is_film = query("SELECT id_tayangan FROM FILM WHERE id_tayangan = %s", [str(tayangan_id)])
     if is_film:
         return 'film'
 
     # Query untuk memeriksa apakah tayangan adalah series
-    is_series = query("SELECT id FROM SERIES WHERE id_tayangan = %s", [str(tayangan_id)])
+    is_series = query("SELECT id_tayangan FROM SERIES WHERE id_tayangan = %s", [str(tayangan_id)])
     if is_series:
         return 'series'
 
@@ -401,7 +401,6 @@ def detail_tayangan(request, id):
 
         print(film, genre_list, actor_list, writer_list, director, reviews, total_views)
 
-
         return render(request, 'film.html', {
             'film': film,
             'genre_list': genre_list,
@@ -486,7 +485,6 @@ def detail_tayangan(request, id):
         total_views = total_views[0][0] if total_views else 0
 
         print(series, genre_list, actor_list, writer_list, director, reviews, total_views)
-
         return render(request, 'series.html', {
             'series': series,
             'genre_list': genre_list,
