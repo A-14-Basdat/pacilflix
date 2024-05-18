@@ -36,12 +36,45 @@
                                 <h3> {{ episode.0.sub_judul }}</h3>
                             
                         </div> 
-                        <div style="margin-top: 30px; margin-bottom: 30px;">
-                            <button class="btn btn-secondary" type="submit" style="width: 250px;font-size: 1.25em;">
-                                Tonton
-                                <ion-icon name="play-circle-outline" style="vertical-align: text-bottom;"></ion-icon>
-                            </button>
+                        <div class="slider">
+                            <form id="progressForm_{{ episode.0.id }}" action="{% url 'tayangan:watch_episode' series_id episode.0.sub_judul %}" method="post">
+                                {% csrf_token %}  
+                                <input type="hidden" name="id" value="{{ series_id }}">
+                                <input type="hidden" name="durasi" value="{{ episode.0.durasi }}">
+                                <!-- <label for="progress" class="form-label"><b>Progress Nonton:</b></label> -->
+                                <div class="card container-card" style="width:100%; padding: 15px; background-color: #cccccc;">
+                                    <div class="progress-container">
+                                        <input type="range" class="form-range" name="progress" id="progress" min="0" max="100" step="1">
+                                    <div class="progress-highlight"></div>
+                                </div>
+                                <div class="center-container">
+                                    <button class="btn btn-secondary" type="submit" style="width: 250px;font-size: 1.25em; border: 1px solid gray;">
+                                        Tonton
+                                        <ion-icon name="play-circle-outline" style="vertical-align: text-bottom;"></ion-icon>
+                                    </button>
+                                </div>
+                            </div>
+                            </form>
                         </div>
+                          
+                        {% if messages %}
+                        <div class="container mt-4" style="padding-bottom: 20px;">
+                            <div class="row justify-content-center">
+                                <div class="col-md-8">
+                                    <ul class="list-group">
+                                        {% for message in messages %}
+                                        <li class="list-group-item{% if 'ulasan' in message.tags %} list-group-item-success{% endif %}
+                                            {% if 'error' in message.tags %} list-group-item-danger{% endif %}
+                                            {% if 'success' in message.tags %} list-group-item-success{% endif %}">
+                                            {{ message }}
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+
                         <div>
                             <div class="left-container-card-data"> 
                                 <h4 class="text-secondary" style="margin-right: 15px;">Episode lainnya: </h4>

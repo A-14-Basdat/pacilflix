@@ -5,6 +5,8 @@ from django.db import InternalError, connection
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from collections import namedtuple
+from urllib.parse import quote
+
 
 def map_cursor(cursor):
     description = cursor.description
@@ -23,6 +25,87 @@ def query(query_str: str, params=None):
         except Exception as e:
             result = e
     return result
+
+def view_trailers(request):
+    search_query = request.GET.get('q', '')
+
+    search_results = []
+    no_results_message = ""
+
+    if search_query:
+        search_results = query(
+            """
+            SELECT T.id, T.judul, T.sinopsis_trailer, T.url_video_trailer, T.release_date_trailer
+            FROM TAYANGAN T
+            WHERE T.judul ILIKE %s
+            """, [f"%{search_query}%"]
+        )
+        if not search_results:
+            no_results_message = "Film atau series belum tersedia di Pacilflix."
+
+
+    films = query(
+        """
+        SELECT T.id, T.judul, T.sinopsis, T.asal_negara, T.sinopsis_trailer, 
+               T.url_video_trailer, T.release_date_trailer, 
+               F.url_video_film, F.release_date_film, F.durasi_film
+        FROM TAYANGAN T
+        JOIN FILM F ON T.id = F.id_tayangan;
+        """
+    )
+
+    series = query(
+        """
+        SELECT T.id, T.judul, T.sinopsis, T.asal_negara, T.sinopsis_trailer, 
+               T.url_video_trailer, T.release_date_trailer
+        FROM TAYANGAN T
+        JOIN SERIES S ON T.id = S.id_tayangan;
+        """
+    )
+
+    episodes = query(
+        """
+        SELECT E.id_series, E.sub_judul, E.sinopsis, E.durasi, E.url_video, 
+               E.release_date, T.judul as series_judul
+        FROM EPISODE E
+        JOIN SERIES S ON E.id_series = S.id_tayangan
+        JOIN TAYANGAN T ON S.id_tayangan = T.id;
+        """
+    )
+
+    top_10 = query(
+        """
+        SELECT T.id, T.judul, T.sinopsis_trailer, T.url_video_trailer, T.release_date_trailer, COUNT(R.username) as total_views
+        FROM RIWAYAT_NONTON R
+        JOIN TAYANGAN T ON R.id_tayangan = T.id
+        LEFT JOIN FILM F ON T.id = F.id_tayangan
+        LEFT JOIN EPISODE E ON T.id = E.id_series
+        WHERE R.end_date_time >= NOW() - INTERVAL '7 days'
+        AND EXTRACT(EPOCH FROM (R.end_date_time - R.start_date_time)) / 60 >= 
+              CASE
+                  WHEN F.id_tayangan IS NOT NULL THEN 0.7 * F.durasi_film
+                  WHEN E.id_series IS NOT NULL THEN 0.7 * E.durasi
+              END
+        GROUP BY T.id, T.judul, T.sinopsis_trailer, T.url_video_trailer, T.release_date_trailer
+        ORDER BY total_views DESC
+        LIMIT 10;
+        """
+    )
+
+    if isinstance(top_10, Exception):
+        top_10 = []
+
+
+    context = {
+        "films": films,
+        "series": series,
+        "episodes": episodes,
+        "search_results": search_results,  
+        "no_results_message": no_results_message, 
+        "top_10": list(enumerate(top_10)), 
+    }
+    # return render(request, "tayangan.html", context)
+    return render(request, 'trailer.html', context)
 
 def show_main(request):
     search_query = request.GET.get('q', '')
@@ -83,7 +166,8 @@ def show_main(request):
         JOIN TAYANGAN T ON R.id_tayangan = T.id
         LEFT JOIN FILM F ON T.id = F.id_tayangan
         LEFT JOIN EPISODE E ON T.id = E.id_series
-        WHERE EXTRACT(EPOCH FROM (R.end_date_time - R.start_date_time)) / 60 >= 
+        WHERE R.end_date_time >= NOW() - INTERVAL '7 days'
+        AND EXTRACT(EPOCH FROM (R.end_date_time - R.start_date_time)) / 60 >= 
               CASE
                   WHEN F.id_tayangan IS NOT NULL THEN 0.7 * F.durasi_film
                   WHEN E.id_series IS NOT NULL THEN 0.7 * E.durasi
@@ -273,7 +357,6 @@ def detail_series(request, id):
     total_ratings = sum(review.rating for review in reviews)
     average_rating = total_ratings / len(reviews) if reviews else 0
 
-    # Count the total views of the selected series based on episode duration
     total_views = query("""
         SELECT COUNT(*)
         FROM RIWAYAT_NONTON RN
@@ -376,3 +459,61 @@ def create_review(request, id):
             return HttpResponse("Tayangan not found", status=404)
 
     return HttpResponseRedirect(f'/tayangan')
+
+def watch_tayangan(request, id):
+    if request.method == "POST":
+        username = request.session.get("username")
+        progress = int(request.POST['progress'])
+        durasi = int(request.POST['durasi'])
+        progress = int((progress/100) * durasi)
+
+        cursor = connection.cursor()
+        try:
+            cursor.execute(f"""
+                INSERT INTO RIWAYAT_NONTON VALUES ('{id}', '{username}', NOW(), NOW() + {progress} * INTERVAL '1 minute');
+            """)
+            messages.add_message(request, messages.SUCCESS, 'Terimakasih sudah menonton film ini!', extra_tags='tonton')
+        except InternalError as e:
+            messages.add_message(request, messages.ERROR, 'Maaf, tayangan tidak bisa ditonton.', extra_tags='tonton')
+        
+        tayangan_type = get_tayangan_type(id)
+        if tayangan_type == 'series':
+            subjudul = request.POST['subjudul']
+            encoded = quote(subjudul)
+            return HttpResponseRedirect(f'/tayangan/{id}/{encoded}')
+        elif tayangan_type == 'film':
+            return HttpResponseRedirect(f'/tayangan/{id}')
+        else:
+            return HttpResponseRedirect('/tayangan')
+
+    return HttpResponseRedirect('/tayangan')  
+
+def watch_episode(request, series_id, episode_judul):
+    # encoded_judul = quote(episode_judul)
+    if request.method == "POST":
+        username = request.session.get("username")
+        progress = request.POST.get('progress', '')  # Dapatkan nilai progress dari POST data, default kosong jika tidak ada
+        durasi = request.POST.get('durasi', '')      # Dapatkan nilai durasi dari POST data, default kosong jika tidak ada
+
+        # Periksa apakah nilai progress dan durasi tidak kosong
+        if progress and durasi:
+            try:
+                progress = int(progress)
+                durasi = int(durasi)
+
+                cursor = connection.cursor()
+                cursor.execute(f"""
+                    INSERT INTO RIWAYAT_NONTON VALUES ('{series_id}', '{username}', NOW(), NOW() + {progress} * INTERVAL '1 minute');
+                """)
+                messages.success(request, 'Terimakasih sudah menonton episode ini!')
+            except ValueError:
+                messages.error(request, 'Progress dan durasi harus berupa bilangan bulat positif.')
+            except Exception as e:
+                messages.error(request, 'Maaf, episode tidak bisa ditonton.')
+
+            return HttpResponseRedirect(f'/series/{series_id}/{episode_judul}/')
+        else:
+            messages.error(request, 'Progress dan durasi harus diisi.')
+            return HttpResponseRedirect(request.path)
+
+    return HttpResponseRedirect(f'/series/{series_id}/{episode_judul}/')
