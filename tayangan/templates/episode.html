@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    {% block meta %}
+    <title>Episode</title>
+    {% endblock meta %}
+
+    
+</head>
+
+<body>
+
+    {% block content %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <div class="container" style="margin-bottom: 70px;"> 
+        <div class="center-container">  <!-- Container to center content -->
+            <h1 class="text-secondary-h1">HALAMAN EPISODE</h1>  <!-- The centered heading -->
+        </div> 
+        <div class="center-container">
+            <div class="card container-card" style="width: 50%;">
+                <div class="container" style="padding-left: 50px; padding-right: 50px; padding-bottom: 50px;">
+                    <div class="card-body">
+                        <div class="left-container-card" style="margin-top: 30px;">  <!-- Container to center content -->
+                            <h3 class="text-secondary" style="margin-right: 15px;">Judul: </h3>
+                            <h3> {{ series_judul }}</h3>
+                            
+                        </div> 
+                        <div class="left-container-card-data">  <!-- Container to center content -->
+                            <h4 class="text-secondary" style="margin-right: 15px;">Subjudul: </h4>
+                            
+                                <h3> {{ episode.0.sub_judul }}</h3>
+                            
+                        </div> 
+                        <div style="margin-top: 30px; margin-bottom: 30px;">
+                            <button class="btn btn-secondary" type="submit" style="width: 250px;font-size: 1.25em;">
+                                Tonton
+                                <ion-icon name="play-circle-outline" style="vertical-align: text-bottom;"></ion-icon>
+                            </button>
+                        </div>
+                        <div>
+                            <div class="left-container-card-data"> 
+                                <h4 class="text-secondary" style="margin-right: 15px;">Episode lainnya: </h4>
+                            </div> 
+                            <ul style="list-style-type: disc; padding-left: 20px;">  <!-- Unordered list with bullet points -->
+                                {% for other_episode in other_episodes %}
+                                <li>
+                                    <a href="{% url 'tayangan:detail_episode' series_id=series_id episode_judul=other_episode.sub_judul %}" class="link-primary link-underline-opacity-25 link-underline-opacity-100-hover" style="font-size: larger;">
+                                        {{ other_episode.sub_judul }}
+                                    </a>
+                                </li>  
+                             {% endfor %}
+                            </ul>
+                        </div>
+                       
+
+                        </div>
+                        <div class="left-container-card-data"> 
+                            <h5 class="text-secondary" style="margin-right: 15px;">Sinopsis Episode: </h5>
+                            {% for e in episode %}
+                            <h5> {{ e.sinopsis }} </h5>
+                            {% endfor %}
+                        </div> 
+                        <div class="left-container-card-data"> 
+                            <h5 class="text-secondary" style="margin-right: 15px;">Durasi Episode: </h5>
+                            {% for e in episode %}
+                            <h5> {{ e.durasi }} </h5>
+                            {% endfor %}
+                        </div> 
+                        <div class="left-container-card-data"> 
+                            <h5 class="text-secondary" style="margin-right: 15px;">URL Episode: </h5>
+                            {% for e in episode %}
+                            <h5> {{ e.url_video }} </h5>
+                            {% endfor %}
+                        </div> 
+                        <div class="left-container-card-data"> 
+                            <h5 class="text-secondary" style="margin-right: 15px;">Tanggal Rilis Episode: </h5>
+                            {% for e in episode %}
+                            <h5> {{ e.release_date }} </h5>
+                            {% endfor %}
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+
+</body>

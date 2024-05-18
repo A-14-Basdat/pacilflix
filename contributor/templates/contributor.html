@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    {% block meta %}
+    <title>Contributor</title>
+    <script defer src="{%static 'js/contributor.js' %}"></script>
+
+    {% endblock meta %}
+
+    
+</head>
+
+<body>
+
+    {% block content %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <div class="container" style="margin-bottom: 70px;">
+
+        <div class="center-container">  <!-- Container to center content -->
+            <h1 class="text-secondary-h1">DAFTAR &nbsp KONTRIBUTOR</h1>  <!-- The centered heading -->
+        </div>    
+    
+        
+        <div class="container my-5" w-10 pt-10 >
+            
+            <div style="margin-left: 20%; margin-right: 60%;">
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Cari berdasarkan tipe:
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="{% url 'contributor:show_contributor' %}">Semua</a>
+                        <a class="dropdown-item" href="{% url 'contributor:show_pemain' %}">Pemain</a>
+                        <a class="dropdown-item" href="{% url 'contributor:show_penulis_skenario' %}">Penulis Skenario</a>
+                        <a class="dropdown-item" href="{% url 'contributor:show_sutradara' %}">Sutradara</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="center-container">
+                
+                
+                <div class="card container-table" style="padding-top: 50px;width:70%;">
+                    <table id="contributors" class="table table-striped" style="width:100%; border-radius: 55px;">
+                        <thead>
+                            <tr>
+                                <th style="text-align: center;">Id</th>
+                                <th style="text-align: center;">Nama</th>
+                                <th style="text-align: center;">Jenis Kelamin</th>
+                                <th style="text-align: center;">Kewarganegaraan</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for d in data %}
+                            <tr>
+                                <td>{{ d.id }}</td>
+                                <td>{{ d.nama }}</td>
+                                <td>
+                                    {% if d.jenis_kelamin == 0 %}
+                                        Laki-laki
+                                    {% else %}
+                                        Perempuan
+                                    {% endif %}
+                                </td>
+                                <td>{{ d.kewarganegaraan }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+</body>
