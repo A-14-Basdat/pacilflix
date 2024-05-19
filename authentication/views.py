@@ -12,7 +12,7 @@ from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.forms import UserCreationForm
 from django.db import IntegrityError
 from django.db import connection, InternalError
-
+from django.http import HttpResponseBadRequest
 
 def register_user(request):
     if request.method == 'POST':
@@ -29,6 +29,8 @@ def register_user(request):
 
         if user_count > 0:
             messages.error(request, "Username already exists. Please choose a different username.")
+            print('udah ada bjir')
+            return render(request, 'register.html', {'error_message': 'Username already exists. Please choose a different username.'})
         else:
             insert_query = f"""
             INSERT INTO PENGGUNA (username, password, negara_asal) 
@@ -44,25 +46,6 @@ def register_user(request):
                 messages.error(request, str(e))
 
     return render(request, 'register.html')
-
-# def register_user(request):
-#     if request.method == 'POST':
-#         username = request.POST.get('username') # PK
-#         password = request.POST.get('password') # NOT NULL
-#         negara_asal = request.POST.get('negara_asal') # NOT NULL
-#         cursor = connection.cursor() 
-#         query = f"""
-#         INSERT INTO PENGGUNA VALUES ('{username}', '{password}', '{negara_asal}');
-        
-#         """   
-#         try:
-#             cursor.execute('set search_path to public')
-#             cursor.execute(query)
-#             return redirect('/authentication/login')
-#         except InternalError as e: 
-#             messages.info(request, str(e.args))
-            
-#     return render(request, 'register.html')
 
 @csrf_exempt
 def login_user(request):
@@ -112,4 +95,4 @@ def logout_user(request):
     del request.session["is_authenticated"]
     return redirect("/authentication")
 
-# Th3Q!ckF0x
+
