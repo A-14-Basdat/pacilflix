@@ -43,6 +43,13 @@
                 <div class="flex justify-center items-center">
                     <input class="btn btn-info login_btn mt-4 mb-4 p-2 rounded-lg h-10 w-100"  type="submit" name="submit" style="border: 1px solid gray;" value="MASUK"/>
                 </div>
+                {% if messages %}
+                <div style="color: red;">
+                    {% for message in messages %}
+                        <p>{{ message }}</p>
+                    {% endfor %}
+                </div>
+                {% endif %}
             </form>
             
             <p>Belum mempunyai akun? <a class="underline font-bold" href="{% url 'authentication:register_user' %}">Buat Akun</a></p>
