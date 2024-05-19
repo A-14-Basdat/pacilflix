@@ -45,7 +45,7 @@ def show_langganan(request):
             FROM TRANSACTION, PAKET
             WHERE TRANSACTION.username = '{request.session["username"]}'
             AND TRANSACTION.nama_paket = PAKET.nama
-            AND end_date_time < CURRENT_DATE
+            AND start_date_time <= CURRENT_DATE
             ;
             """
         )
