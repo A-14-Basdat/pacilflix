@@ -1,6 +1,6 @@
 from django.urls import path, register_converter
 # from tayangan.views import show_episode, show_film, show_main, show_series
-from tayangan.views import show_main, detail_film, detail_series, detail_episode, detail_tayangan, create_review, watch_tayangan, watch_episode, view_trailers
+from tayangan.views import show_main, detail_film, detail_series, detail_episode, detail_tayangan, create_review, watch_tayangan, watch_episode, view_trailers, download_film, add_to_favorites
 import uuid
 
 # Custom UUID converter
@@ -26,6 +26,8 @@ urlpatterns = [
     path('create_review/<uuid:id>/', create_review, name='create_review'),
     path('watch/<uuid:id>/', watch_tayangan, name='watch_tayangan'),
     path('watch/<uuid:series_id>/<str:episode_judul>/', watch_episode, name='watch_episode'),
-    path('trailers', view_trailers, name='view_trailers')
+    path('trailers', view_trailers, name='view_trailers'),
+    path('download/<uuid:film_id>/', download_film, name='download_film'),
+    path('add_to_favorites/<uuid:film_id>/<str:judul>/', add_to_favorites, name='add_to_favorites'),
 ]
 

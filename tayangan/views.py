@@ -510,3 +510,44 @@ def watch_episode(request, series_id, episode_judul):
             return HttpResponseRedirect(request.path)
 
     return HttpResponseRedirect(f'/series/{series_id}/{episode_judul}/')
+
+def download_film(request, film_id):
+    if request.method == "POST":
+        username = username = request.session.get("username")
+        timestamp = datetime.now()
+
+        with connection.cursor() as cursor:
+            cursor.execute(
+                "INSERT INTO tayangan_terunduh (id_tayangan, username, timestamp) VALUES (%s, %s, %s)",
+                [film_id, username, timestamp]
+            )
+
+        return redirect('unduhan:show_unduhan')
+    else:
+        return HttpResponse("Invalid request", status=400)
+
+def add_to_favorites(request, film_id, judul):
+    if request.method == "POST":
+        username =  request.session.get("username") # Use Django's authentication system
+
+        # Current timestamp
+        current_timestamp = datetime.now()
+
+        # Ensure there is a record in DAFTAR_FAVORIT for the film and user
+        with connection.cursor() as cursor:
+            # This inserts a new favorite list entry if not already present
+            cursor.execute("""
+                INSERT INTO daftar_favorit (timestamp, username, judul)
+                VALUES (%s, %s, %s)
+            """, [current_timestamp, username, judul])
+
+        # Insert the favorite film entry linking the film to the user
+        with connection.cursor() as cursor:
+            cursor.execute("""
+                INSERT INTO tayangan_memiliki_daftar_favorit (id_tayangan, timestamp, username)
+                VALUES (%s, %s, %s)
+            """, [film_id, current_timestamp, username])
+
+        return redirect('favorit:show_favorit')  # Redirect to a confirmation page, etc.
+    else:
+        return HttpResponse("Invalid request", status=400)

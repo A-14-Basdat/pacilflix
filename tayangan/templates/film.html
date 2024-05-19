@@ -83,71 +83,66 @@
                                 <ion-icon name="play-circle-outline" style="vertical-align: text-bottom;"></ion-icon>
                             </button>
                         </div> -->
-                        <div>
-                            <button type="button" class="btn btn-secondary" style="width: 250px;font-size: 1.25em;" data-bs-toggle="modal" data-bs-target="#unduhModal">
-                                Unduh Tayangan &nbsp
-                                <ion-icon name="cloud-download-outline" style="vertical-align: text-bottom;"></ion-icon>
-                            </button>
-                            <div class="modal fade" id="unduhModal" tabindex="-1" aria-labelledby="unduhModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered">
-                                  <div class="modal-content">
-                                    <div class="modal-header">
-                                      <h5 class="modal-title" id="unduhModalLabel" style="text-align: center; width: 100%;">SUKSES MENAMBAHKAN
-                                        TAYANGAN KE DAFTAR
-                                        UNDUHAN</h5>
-                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <!-- Jurassic Park itu [Judul Tayangan]; 2024-05-09 itu  [current time + 7 hari] -->
-                                        Selamat! Anda telah berhasil mengunduh Jurassic Park dan akan 
-                                        berlaku hingga 2024-05-09. Cek secondaryrmasi selengkapnya
-                                        pada halaman daftar unduhan.
-                                    </div>
-                                    <div class="modal-footer justify-content-center">
-                                        <button type="button" class="btn btn-secondary " data-bs-dismiss="modal">Ke Daftar Unduhan</button>
-                                      </div>
-                                  </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div style="padding-top: 20px;">
-                            <button  type="button" class="btn btn-secondary" style="width: 250px;font-size: 1.25em;" data-bs-toggle="modal" data-bs-target="#favoritModal">
-                                Favorit Tayangan
-                                <ion-icon name="bookmark-outline" style="vertical-align: text-bottom;"></ion-icon>
-                            </button>
-                            <div class="modal fade" id="favoritModal" tabindex="-1" aria-labelledby="favoritModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered">
-                                  <div class="modal-content">
-                                    <div class="modal-header">
-                                      <h5 class="modal-title" id="favoritModalLabel" style="text-align: center; width: 100%;">TAMBAH KE DAFTAR FAVORIT MODAL</h5>
-                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form>
-                                            <div class="form-group mb-4">
-                                                <label for="exampleFormControlSelect1" style="font-size: 1.25em; margin-bottom: 10px; font-size: larger;">Judul Daftar Favorit</label>
-                                                <select class="form-control" id="exampleFormControlSelect1" style="font-size: 1.25em;">
-                                                    <option>Daftar Favorit A</option>
-                                                    <option>Daftar Favorit B</option>
-                                                    <option>Daftar Favorit C</option>
-                                                </select>
-                                            </div>
+                        {% for f in film %}
+						<div>
+							<button type="button" class="btn btn-secondary" style="width: 250px;font-size: 1.25em;" data-bs-toggle="modal" data-bs-target="#unduhModal">
+								Unduh Tayangan &nbsp
+								<ion-icon name="cloud-download-outline" style="vertical-align: text-bottom;"></ion-icon>
+							</button>
+							<div class="modal fade" id="unduhModal" tabindex="-1" aria-labelledby="unduhModalLabel" aria-hidden="true">
+								<div class="modal-dialog modal-dialog-centered">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" id="unduhModalLabel" style="text-align: center; width: 100%;">SUKSES MENAMBAHKAN
+												TAYANGAN KE DAFTAR
+												UNDUHAN</h5>
+											<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+										</div>
+										<div class="modal-body">
+											Selamat! Anda telah berhasil mengunduh Jurassic Park dan akan 
+											berlaku hingga 2024-05-09. Cek informasi selengkapnya
+											pada halaman daftar unduhan.
+										</div>
+										<div class="modal-footer justify-content-center">
+											<form action="{% url 'tayangan:download_film' f.id %}" method="post">
+												{% csrf_token %}
+												<button type="submit" class="btn btn-secondary">Ke Daftar Unduhan</button>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						{% endfor %}
 
-                                            <div style="margin-bottom: 30px;">
-                            
-                                            </div>
+                        {% for f in film %}
+						<div>
+							<button type="button" class="btn btn-secondary" style="width: 250px;font-size: 1.25em;" data-bs-toggle="modal" data-bs-target="#favoritModal-{{ f.id }}">
+								Favorit Tayangan
+								<ion-icon name="bookmark-outline" style="vertical-align: text-bottom;"></ion-icon>
+							</button>
+							<div class="modal fade" id="favoritModal-{{ f.id }}" tabindex="-1" aria-labelledby="favoritModalLabel" aria-hidden="true">
+								<div class="modal-dialog modal-dialog-centered">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" id="favoritModalLabel" style="text-align: center; width: 100%;">Tambah ke Daftar Favorit</h5>
+											<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+										</div>
+										<div class="modal-body">
+											<p>Anda yakin ingin menambahkan film ini ke daftar favorit Anda?</p>
+										</div>
+										<div class="modal-footer justify-content-center">
+											<form action="{% url 'tayangan:add_to_favorites' f.id f.judul %}" method="post">
+												{% csrf_token %}
+												<button type="submit" class="btn btn-secondary">Tambah ke Favorit</button>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						{% endfor %}
 
-                                            <div style="margin-top: 30px; margin-bottom: 30px;">
-                                                <button class="btn btn-secondary" type="submit" style="width: 100%;font-size: 1.25em;">
-                                                    Tambah
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                  </div>
-                                </div>
-                            </div>
-                        </div>
                         
                         <div style="margin-top: 60px;">
 
@@ -280,7 +275,6 @@
             </form>
             {% endfor %}
         </div>
-        s
 
         <div class="container my-5" w-10>
             <div class="center-container">
