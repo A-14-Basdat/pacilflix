@@ -494,17 +494,20 @@ def watch_episode(request, series_id, episode_judul):
         username = request.session.get("username")
         progress = request.POST.get('progress', '')  # Dapatkan nilai progress dari POST data, default kosong jika tidak ada
         durasi = request.POST.get('durasi', '')      # Dapatkan nilai durasi dari POST data, default kosong jika tidak ada
-
+        print(f"durasinya {durasi} menit")
         # Periksa apakah nilai progress dan durasi tidak kosong
         if progress and durasi:
             try:
                 progress = int(progress)
                 durasi = int(durasi)
+                progress = int((progress/100) * durasi)
 
                 cursor = connection.cursor()
                 cursor.execute(f"""
                     INSERT INTO RIWAYAT_NONTON VALUES ('{series_id}', '{username}', NOW(), NOW() + {progress} * INTERVAL '1 minute');
                 """)
+
+                print(f"progressnya {progress} menit")
                 messages.success(request, 'Terimakasih sudah menonton episode ini!')
             except ValueError:
                 messages.error(request, 'Progress dan durasi harus berupa bilangan bulat positif.')
