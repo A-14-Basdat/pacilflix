@@ -39,13 +39,13 @@
               <div class="collapse navbar-collapse" id="navbarTogglerDemo02" >
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                      <a class="nav-link" aria-current="page" href="{% url 'tayangan:show_main' %}">Trailer Tayangan</a>
+                      <a class="nav-link" aria-current="page" href="{% url 'tayangan:view_trailers' %}">Trailer Tayangan</a>
                     </li>
                   </ul>
                 <div class="ms-auto"></div>
 
                 <form class="nav-item">
-                  <button class="btn btn-primary" type="submit" style="width: 125px;">Login</button>
+                  <a class="btn btn-primary" type="submit" style="width: 125px;" href="{% url 'authentication:authentication_user' %}">Login</a>
                 </form>
               </div>
             </div>

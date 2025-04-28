@@ -29,100 +29,119 @@ def query(query_str: str):
     return result
 
 def show_langganan(request):
-    pilihan = query(
-        f"""
-        SELECT nama, harga, resolusi_layar, STRING_AGG(dukungan_perangkat, ', ')
-        FROM PAKET, DUKUNGAN_PERANGKAT
-        WHERE PAKET.nama = DUKUNGAN_PERANGKAT.nama_paket
-        GROUP BY PAKET.nama;
-        """
-    )
+    try:
+        pilihan = query(
+            f"""
+            SELECT nama, harga, resolusi_layar, STRING_AGG(dukungan_perangkat, ', ')
+            FROM PAKET, DUKUNGAN_PERANGKAT
+            WHERE PAKET.nama = DUKUNGAN_PERANGKAT.nama_paket
+            GROUP BY PAKET.nama;
+            """
+        )
 
-    riwayat = query(
-        f"""
-        SELECT *
-        FROM TRANSACTION, PAKET
-        WHERE TRANSACTION.username = '{request.session["username"]}'
-        AND TRANSACTION.nama_paket = PAKET.nama
-        AND end_date_time < CURRENT_DATE
-        ;
-        """
-    )
+        riwayat = query(
+            f"""
+            SELECT *
+            FROM TRANSACTION, PAKET
+            WHERE TRANSACTION.username = '{request.session["username"]}'
+            AND TRANSACTION.nama_paket = PAKET.nama
+            AND start_date_time <= CURRENT_DATE
+            ;
+            """
+        )
 
-    aktif = query(
-        f"""
-        SELECT nama, harga, resolusi_layar, STRING_AGG(dukungan_perangkat, ', '), start_date_time, end_date_time
-        FROM TRANSACTION, PAKET, DUKUNGAN_PERANGKAT
-        WHERE TRANSACTION.username = '{request.session["username"]}'
-        AND TRANSACTION.nama_paket = PAKET.nama 
-        AND end_date_time > CURRENT_DATE
-        AND start_date_time <= CURRENT_DATE
-        AND PAKET.nama = DUKUNGAN_PERANGKAT.nama_paket
-        GROUP BY PAKET.nama, start_date_time, end_date_time;
-        """
-    )
+        aktif = query(
+            f"""
+            SELECT nama, harga, resolusi_layar, STRING_AGG(dukungan_perangkat, ', '), start_date_time, end_date_time
+            FROM TRANSACTION, PAKET, DUKUNGAN_PERANGKAT
+            WHERE TRANSACTION.username = '{request.session["username"]}'
+            AND TRANSACTION.nama_paket = PAKET.nama 
+            AND end_date_time > CURRENT_DATE
+            AND start_date_time <= CURRENT_DATE
+            AND PAKET.nama = DUKUNGAN_PERANGKAT.nama_paket
+            GROUP BY PAKET.nama, start_date_time, end_date_time;
+            """
+        )
 
-    context = {
-        "pilihan": pilihan,
-        "riwayat": riwayat,
-        "aktif": aktif
-    }
-    # print(pilihan)
-    # print(riwayat)
-    print(aktif)
-   
-    return render(request, "langganan.html", context)
+        context = {
+            "pilihan": pilihan,
+            "riwayat": riwayat,
+            "aktif": aktif
+        }
+        # print(pilihan)
+        # print(riwayat)
+        print(aktif)
+    
+        return render(request, "langganan.html", context)
+    except Exception as e:
+        return redirect('/authentication')
+
 
 def show_beli_basic(request):
-    data = query(
-        f"""
-        SELECT nama, harga, resolusi_layar, STRING_AGG(dukungan_perangkat, ', ')
-        FROM PAKET, DUKUNGAN_PERANGKAT
-        WHERE PAKET.nama = 'basic'
-        AND PAKET.nama = DUKUNGAN_PERANGKAT.nama_paket
-        GROUP BY PAKET.nama;
-        """
-    )
-   
-    context = {
-        "data": data
-    }
-   
-    return render(request, "beli.html", context)
+    if "username" in request.session:
+        username = request.session["username"]
+        data = query(
+            f"""
+            SELECT nama, harga, resolusi_layar, STRING_AGG(dukungan_perangkat, ', ')
+            FROM PAKET, DUKUNGAN_PERANGKAT
+            WHERE PAKET.nama = 'basic'
+            AND PAKET.nama = DUKUNGAN_PERANGKAT.nama_paket
+            GROUP BY PAKET.nama;
+            """
+        )
+    
+        context = {
+            "data": data
+        }
+    
+        return render(request, "beli.html", context)
+    
+    else:
+        return redirect('/authentication')
 
 def show_beli_premium(request):
-    data = query(
-        f"""
-        SELECT nama, harga, resolusi_layar, STRING_AGG(dukungan_perangkat, ', ')
-        FROM PAKET, DUKUNGAN_PERANGKAT
-        WHERE PAKET.nama = 'premium'
-        AND PAKET.nama = DUKUNGAN_PERANGKAT.nama_paket
-        GROUP BY PAKET.nama;
-        """
-    )
-   
-    context = {
-        "data": data
-    }
-   
-    return render(request, "beli.html", context)
+    if "username" in request.session:
+        username = request.session["username"]
+        data = query(
+            f"""
+            SELECT nama, harga, resolusi_layar, STRING_AGG(dukungan_perangkat, ', ')
+            FROM PAKET, DUKUNGAN_PERANGKAT
+            WHERE PAKET.nama = 'premium'
+            AND PAKET.nama = DUKUNGAN_PERANGKAT.nama_paket
+            GROUP BY PAKET.nama;
+            """
+        )
+    
+        context = {
+            "data": data
+        }
+    
+        return render(request, "beli.html", context)
+    
+    else:
+        return redirect('/authentication')
 
 def show_beli_standard(request):
-    data = query(
-        f"""
-        SELECT nama, harga, resolusi_layar, STRING_AGG(dukungan_perangkat, ', ')
-        FROM PAKET, DUKUNGAN_PERANGKAT
-        WHERE PAKET.nama = 'standard'
-        AND PAKET.nama = DUKUNGAN_PERANGKAT.nama_paket
-        GROUP BY PAKET.nama;
-        """
-    )
-   
-    context = {
-        "data": data
-    }
-   
-    return render(request, "beli.html", context)
+    if "username" in request.session:
+        username = request.session["username"]
+        data = query(
+            f"""
+            SELECT nama, harga, resolusi_layar, STRING_AGG(dukungan_perangkat, ', ')
+            FROM PAKET, DUKUNGAN_PERANGKAT
+            WHERE PAKET.nama = 'standard'
+            AND PAKET.nama = DUKUNGAN_PERANGKAT.nama_paket
+            GROUP BY PAKET.nama;
+            """
+        )
+    
+        context = {
+            "data": data
+        }
+    
+        return render(request, "beli.html", context)
+    
+    else:
+        return redirect('/authentication')
 
 def bayar(request):
     print('atas')

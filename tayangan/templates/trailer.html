@@ -1,0 +1,193 @@
+{% extends 'guest-navbar.html' %}
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    {% block meta %}
+    <title>Tayangan</title>
+    {% endblock meta %}
+</head>
+
+<body>
+    {% block extra_head %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    {% endblock extra_head %}
+    
+    {% block content %}
+    <div class="container" style="margin-bottom: 100px;">
+        <div class="center-container">
+            <h1 class="text-secondary-h1">DAFTAR &nbsp TRAILER</h1>
+        </div>
+
+        <div class="container" style="margin-bottom: 50px;">
+            <div class="left-container"> <!-- Container to center content -->
+                <form class="d-flex" method="GET" action="{% url 'tayangan:show_main' %}" role="search" style="margin-left: 40px; width: 350px;">
+                    <input class="form-control me-2" type="search" name="q" placeholder="Search by Judul..." aria-label="Search" style="background-color: white;font-size: medium; width: 70%;" />
+                    <button class="btn btn-primary" type="submit" style="width: 30%;">Search</button>
+                </form>
+            </div>
+
+            {% if no_results_message %}
+                
+                <div class="container my-5">
+                    <div class="center-container">
+                        <div class="card container-table">
+                            <div class="left-container">
+                                <h3 class="text-secondary" style="margin-top: 30px; margin-left: 20px;">Hasil Pencarian</h3>
+                            </div>
+                            <table class="table table-striped" style="width:100%">
+                                <p>{{ no_results_message }}</p>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+    
+            <!-- Search Results Section -->
+            {% if search_results %}
+            <div class="container my-5">
+                <div class="center-container">
+                    <div class="card container-table">
+                        <div class="left-container">
+                            <h3 class="text-secondary" style="margin-top: 30px; margin-left: 20px;">Hasil Pencarian</h3>
+                        </div>
+                        <table class="table table-striped" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>Judul</th>
+                                    <th>Sinopsis Trailer</th>
+                                    <th>URL Trailer</th>
+                                    <th>Tanggal Rilis Trailer</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for result in search_results %}
+                                <tr>
+                                    <td>{{ result.judul }}</td>
+                                    <td>{{ result.sinopsis_trailer }}</td>
+                                    <td><a href="{{ result.url_video_trailer }}">{{ result.url_video_trailer }}</a></td>
+                                    <td>{{ result.release_date_trailer }}</td>
+                             
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+        
+
+    
+        <!-- PLACEHOLDER TOP 10 -->
+        <div class="center-container">
+            <div class="card container-table">
+                <div class="left-container">
+                    <h3 class="text-secondary" style="margin-top: 30px; margin-left: 20px;">10 Tayangan Terbaik Minggu ini</h3>
+                </div>
+                <div class="center-container">
+                </div>
+                <table id="example" class="table table-striped" style="width:100%; border-radius: 55px; margin-top: 30px;">
+                    <thead>
+                        <tr style="border-bottom: 2px solid black;">
+                            <th style="text-align: center;">Peringkat</th>
+                            <th style="text-align: center;">Judul</th>
+                            <th style="text-align: center;">Sinopsis Trailer</th>
+                            <th style="text-align: center;">URL Trailer</th>
+                            <th style="text-align: center;">Tanggal Rilis Trailer</th>
+                            <th style="text-align: center;">Total Views</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for idx, item in top_10 %}
+                        <tr>
+                            <td>{{ idx|add:1 }}</td>
+                            <td>{{ item.judul }}</td>
+                            <td>{{ item.sinopsis_trailer }}</td>
+                            <td><a href="{{ item.url_video_trailer }}">{{ item.url_video_trailer }}</a></td>
+                            <td>{{ item.release_date_trailer }}</td>
+                            <td>{{ item.total_views }}</td>
+                           
+                         
+                        
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- PLACEHOLDER TOP 10 -->
+
+        <!-- Films Section -->
+        <div class="container my-5" w-10 pt-10>
+            <div class="center-container">
+                <div class="card container-table">
+                    <div class="left-container">
+                        <h3 class="text-secondary" style="margin-top: 30px; margin-left: 20px;">Film</h3>
+                    </div>
+                    <table id="exampleFilm" class="table table-striped" style="width:100%">
+                        <thead>
+                            <tr style="border-bottom: 2px solid black;">
+                                <th style="text-align: center;">Judul</th>
+                                <th style="text-align: center;">Sinopsis Trailer</th>
+                                <th style="text-align: center;">URL Trailer</th>
+                                <th style="text-align: center;">Tanggal Rilis Trailer</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for film in films %}
+                            <tr>
+                                <td>{{ film.judul }}</td>
+                                <td>{{ film.sinopsis_trailer }}</td>
+                                <td><a href="{{ film.url_video_trailer }}">{{ film.url_video_trailer }}</a></td>
+                                <td>{{ film.release_date_trailer }}</td>
+                              
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Series Section -->
+        <div class="container my-5" w-10 pt-10>
+            <div class="center-container">
+                <div class="card container-table">
+                    <div class="left-container">
+                        <h3 class="text-secondary" style="margin-top: 30px; margin-left: 20px;">Series</h3>
+                    </div>
+                    <table id="exampleSeries" class="table table-striped" style="width:100%">
+                        <thead>
+                            <tr style="border-bottom: 2px solid black;">
+                                <th style="text-align: center;">Judul</th>
+                                <th style="text-align: center;">Sinopsis Trailer</th>
+                                <th style="text-align: center;">URL Trailer</th>
+                                <th style="text-align: center;">Tanggal Rilis Trailer</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for series in series %}
+                            <tr>
+                                <td>{{ series.judul }}</td>
+                                <!-- <td>{{ series.sinopsis }}</td> -->
+                                <td>{{ series.sinopsis_trailer }}</td>
+                                <td><a href="{{ series.url_video_trailer }}">{{ series.url_video_trailer }}</a></td>
+                                <td>{{ series.release_date_trailer }}</td>
+                              
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock content %}
+</body>
+</html>

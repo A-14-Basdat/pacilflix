@@ -24,135 +24,192 @@
             <h1 class="text-secondary mt-4">HALAMAN FILM</h1>  <!-- The centered heading -->
         </div>     
         <div class="center-container">
+          
             <div class="card container-card" style="width:50%;">
+                {% if messages %}
+                    <div class="container mt-4">
+                        <div class="row justify-content-center">
+                            <div class="col-md-8">
+                                <ul class="list-group">
+                                    {% for message in messages %}
+                                    <li class="list-group-item{% if 'ulasan' in message.tags %} list-group-item-success{% endif %}
+                                        {% if 'error' in message.tags %} list-group-item-danger{% endif %}
+                                        {% if 'success' in message.tags %} list-group-item-success{% endif %}">
+                                        {{ message }}
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
                 <div class="container" style="padding-left: 50px; padding-right: 50px; padding-bottom: 50px;">
                     <div class="card-body">
                         <div class="left-container-card" style="margin-top: 30px;">  <!-- Container to center content -->
                             <h3 class="text-secondary" style="margin-right: 10px;">Judul: </h3>
-                            <h3> Jurassic Park</h3>
+                            {% for f in film %}
+                            <h3> {{ f.judul }}</h3>
+                            {% endfor %}
                         </div> 
-                        <div style="margin-top: 30px; margin-bottom: 30px;">
+
+                        <div class="slider">
+                            {% for f in film %}
+                            <form id="progressForm_{{ f.id }}" action="{% url 'tayangan:watch_tayangan' f.id %}" method="post">
+                                {% csrf_token %}  
+                                <input type="hidden" name="id" value="{{ f.id }}">
+                                <input type="hidden" name="durasi" value="{{ f.durasi_film }}">
+                                <!-- <label for="progress" class="form-label"><b>Progress Nonton:</b></label> -->
+                                <div class="card container-card" style="width:100%; padding: 15px; background-color: #cccccc;">
+                                    <div class="progress-container">
+                                        <input type="range" class="form-range" name="progress" id="progress" min="0" max="100" step="1">
+                                    <div class="progress-highlight"></div>
+                                </div>
+                                <div class="center-container">
+                                    <button class="btn btn-secondary" type="submit" style="width: 250px;font-size: 1.25em; border: 1px solid gray;">
+                                        Tonton
+                                        <ion-icon name="play-circle-outline" style="vertical-align: text-bottom;"></ion-icon>
+                                    </button>
+                                </div>
+                            </div>
+                            </form>
+                            {% endfor %}
+                        </div>
+                          
+                        
+
+                        <!-- <div style="margin-top: 30px; margin-bottom: 30px;">
                             <button class="btn btn-secondary" type="submit" style="width: 250px;font-size: 1.25em; border: 1px solid gray;">
                                 Tonton
                                 <ion-icon name="play-circle-outline" style="vertical-align: text-bottom;"></ion-icon>
                             </button>
-                        </div>
-                        <div style="padding-top: 20px;">
-                            <button type="button" class="btn btn-secondary" style="width: 250px;font-size: 1.25em;" data-bs-toggle="modal" data-bs-target="#unduhModal">
-                                Unduh Tayangan &nbsp
-                                <ion-icon name="cloud-download-outline" style="vertical-align: text-bottom;"></ion-icon>
-                            </button>
-                            <div class="modal fade" id="unduhModal" tabindex="-1" aria-labelledby="unduhModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered">
-                                  <div class="modal-content">
-                                    <div class="modal-header">
-                                      <h5 class="modal-title" id="unduhModalLabel" style="text-align: center; width: 100%;">SUKSES MENAMBAHKAN
-                                        TAYANGAN KE DAFTAR
-                                        UNDUHAN</h5>
-                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <!-- Jurassic Park itu [Judul Tayangan]; 2024-05-09 itu  [current time + 7 hari] -->
-                                        Selamat! Anda telah berhasil mengunduh Jurassic Park dan akan 
-                                        berlaku hingga 2024-05-09. Cek secondaryrmasi selengkapnya
-                                        pada halaman daftar unduhan.
-                                    </div>
-                                    <div class="modal-footer justify-content-center">
-                                        <button type="button" class="btn btn-secondary " data-bs-dismiss="modal">Ke Daftar Unduhan</button>
-                                      </div>
-                                  </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div style="padding-top: 20px;">
-                            <button  type="button" class="btn btn-secondary" style="width: 250px;font-size: 1.25em;" data-bs-toggle="modal" data-bs-target="#favoritModal">
-                                Favorit Tayangan
-                                <ion-icon name="bookmark-outline" style="vertical-align: text-bottom;"></ion-icon>
-                            </button>
-                            <div class="modal fade" id="favoritModal" tabindex="-1" aria-labelledby="favoritModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered">
-                                  <div class="modal-content">
-                                    <div class="modal-header">
-                                      <h5 class="modal-title" id="favoritModalLabel" style="text-align: center; width: 100%;">TAMBAH KE DAFTAR FAVORIT MODAL</h5>
-                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form>
-                                            <div class="form-group mb-4">
-                                                <label for="exampleFormControlSelect1" style="font-size: 1.25em; margin-bottom: 10px; font-size: larger;">Judul Daftar Favorit</label>
-                                                <select class="form-control" id="exampleFormControlSelect1" style="font-size: 1.25em;">
-                                                    <option>Daftar Favorit A</option>
-                                                    <option>Daftar Favorit B</option>
-                                                    <option>Daftar Favorit C</option>
-                                                </select>
-                                            </div>
+                        </div> -->
+                        {% for f in film %}
+						<div>
+							<button type="button" class="btn btn-secondary" style="width: 250px;font-size: 1.25em;" data-bs-toggle="modal" data-bs-target="#unduhModal">
+								Unduh Tayangan &nbsp
+								<ion-icon name="cloud-download-outline" style="vertical-align: text-bottom;"></ion-icon>
+							</button>
+							<div class="modal fade" id="unduhModal" tabindex="-1" aria-labelledby="unduhModalLabel" aria-hidden="true">
+								<div class="modal-dialog modal-dialog-centered">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" id="unduhModalLabel" style="text-align: center; width: 100%;">SUKSES MENAMBAHKAN
+												TAYANGAN KE DAFTAR
+												UNDUHAN</h5>
+											<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+										</div>
+										<div class="modal-body">
+											Selamat! Anda telah berhasil mengunduh Jurassic Park dan akan 
+											berlaku hingga 2024-05-09. Cek informasi selengkapnya
+											pada halaman daftar unduhan.
+										</div>
+										<div class="modal-footer justify-content-center">
+											<form action="{% url 'tayangan:download_film' f.id %}" method="post">
+												{% csrf_token %}
+												<button type="submit" class="btn btn-secondary">Ke Daftar Unduhan</button>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						{% endfor %}
 
-                                            <div style="margin-bottom: 30px;">
-                            
-                                            </div>
+                        {% for f in film %}
+						<div>
+							<button type="button" class="btn btn-secondary" style="width: 250px;font-size: 1.25em;" data-bs-toggle="modal" data-bs-target="#favoritModal-{{ f.id }}">
+								Favorit Tayangan
+								<ion-icon name="bookmark-outline" style="vertical-align: text-bottom;"></ion-icon>
+							</button>
+							<div class="modal fade" id="favoritModal-{{ f.id }}" tabindex="-1" aria-labelledby="favoritModalLabel" aria-hidden="true">
+								<div class="modal-dialog modal-dialog-centered">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" id="favoritModalLabel" style="text-align: center; width: 100%;">Tambah ke Daftar Favorit</h5>
+											<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+										</div>
+										<div class="modal-body">
+											<p>Anda yakin ingin menambahkan film ini ke daftar favorit Anda?</p>
+										</div>
+										<div class="modal-footer justify-content-center">
+											<form action="{% url 'tayangan:add_to_favorites' f.id f.judul %}" method="post">
+												{% csrf_token %}
+												<button type="submit" class="btn btn-secondary">Tambah ke Favorit</button>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						{% endfor %}
 
-                                            <div style="margin-top: 30px; margin-bottom: 30px;">
-                                                <button class="btn btn-secondary" type="submit" style="width: 100%;font-size: 1.25em;">
-                                                    Tambah
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                  </div>
-                                </div>
-                            </div>
-                        </div>
                         
                         <div style="margin-top: 60px;">
 
                         </div>
                         <div class="left-container-card-data"> 
-                            <h5 class="text-secondary" style="margin-right: 10px;">Total View: </h5>
-                            <h5> 8100000</h5>
+                            <h5 class="text-secondary" style="margin-right: 10px;">Total Views: </h5>
+                            <!-- {% for f in film %} -->
+                            <h5> {{ total_views }}</h5>
+                            <!-- {% endfor %} -->
                         </div> 
                         <div class="left-container-card-data"> 
                             <h5 class="text-secondary" style="margin-right: 10px;">Rating Rata-Rata: </h5>
-                            <h5> 8.5</h5>
+                            <h5> {{ average_rating }}</h5>
                         </div> 
                         <div class="left-container-card-data"> 
                             <h5 class="text-secondary" style="margin-right: 10px;">Sinopsis: </h5>
-                            <h5> 65 million years in the making.</h5>
+                            {% for f in film %}
+                            <h5> {{ f.sinopsis }}</h5>
+                            {% endfor %}
                         </div> 
                         <div class="left-container-card-data"> 
                             <h5 class="text-secondary" style="margin-right: 10px;">Durasi Film: </h5>
-                            <h5> 122</h5>
+                            {% for f in film %}
+                            <h5> {{ f.durasi_film }} menit</h5>
+                            {% endfor %}
                         </div> 
                         <div class="left-container-card-data"> 
                             <h5 class="text-secondary" style="margin-right: 10px;">Tanggal Rilis Film: </h5>
-                            <h5> 1993-07-11</h5>
+                            {% for f in film %}
+                            <h5> {{ f.release_date_film }}</h5>
+                            {% endfor %}
                         </div> 
                         <div class="left-container-card-data"> 
                             <h5 class="text-secondary" style="margin-right: 10px;">URL Film: </h5>
-                            <h5> https://www.pacilflix.com/jurassic-park/watch</h5>
+                            {% for f in film %}
+                            <h5> {{ f.url_video_film }}</h5>
+                            {% endfor %}
                         </div> 
                         <div>
                             <div class="left-container-card-data"> 
                                 <h5 class="text-secondary" style="margin-right: 10px;">Genre: </h5>
                             </div> 
                             <ul style="list-style-type: disc; padding-left: 20px;">  <!-- Unordered list with bullet points -->
-                                <li>Action</li>
-                                <li>Adventure</li>
-                                <li>Science Fiction</li>
+                                {% for genre in genre_list %}
+            
+                                <li>{{ genre }}</li>
+                          
+                                {% endfor %}
+                             
                             </ul>
                         </div>
                         <div class="left-container-card-data"> 
                             <h5 class="text-secondary" style="margin-right: 10px;">Asal Negara: </h5>
-                            <h5> Amerika Serikat </h5>
+                            {% for f in film %}
+                            <h5> {{ f.asal_negara }}</h5>
+                            {% endfor %}
                         </div> 
                         <div>
                             <div class="left-container-card-data"> 
                                 <h5 class="text-secondary" style="margin-right: 10px;">Pemain: </h5>
                             </div> 
                             <ul style="list-style-type: disc; padding-left: 20px;">  <!-- Unordered list with bullet points -->
-                                <li>Laura Dern</li>
-                                <li>Jeff Goldblum</li>
-                                <li>Sam Neill</li>
-                                <li>Richard Attenborough</li>
+                                {% for actor in actor_list %}
+            
+                                <li>{{ actor }}</li>
+                          
+                                {% endfor %}
                             </ul>
                         </div>
                         <div>
@@ -160,14 +217,20 @@
                                 <h5 class="text-secondary" style="margin-right: 10px;">Penulis Skenario: </h5>
                             </div> 
                             <ul style="list-style-type: disc; padding-left: 20px;">  <!-- Unordered list with bullet points -->
-                                <li>Steven Spielberg</li>
-                                <li>David Koepp</li>
-                                <li>Michael Crichton</li>
+                                {% for writer in writer_list %}
+            
+                                <li>{{ writer }}</li>
+                          
+                                {% endfor %}
                             </ul>
                         </div>
                         <div class="left-container-card-data"> 
                             <h5 class="text-secondary" style="margin-right: 10px;">Sutradara: </h5>
-                            <h5> Steven Spielberg</h5>
+                            {% for d in director %}
+            
+                            {{ d.nama }}
+                      
+                            {% endfor %}
                         </div> 
                     </div>
                 </div>
@@ -180,37 +243,39 @@
             <h1 class="text-secondary-h1">BAGIAN &nbsp ULASAN</h1>  <!-- The centered heading -->
         </div>  
         <div class="container my-5" style="padding-left: 200px; padding-right: 200px;">
-            <form>
-                <div class="form-group">
-                    <label for="exampleFormControlTextarea1" style="font-size: 1.25em; margin-bottom: 20px;">Deskripsi Ulasan</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" style="font-size: 1.25em;"></textarea>
-                </div>
-                <div style="margin-bottom: 30px;">
-
-                </div>
-                <div class="form-group">
-                    <label for="exampleFormControlSelect1" style="font-size: 1.25em; margin-bottom: 20px;">Rating</label>
-                    <select class="form-control" id="exampleFormControlSelect1" style="font-size: 1.25em;">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                        <option>6</option>
-                        <option>7</option>
-                        <option>8</option>
-                        <option>9</option>
-                        <option>10</option>
+            {% for f in film %}
+            <form method="POST" action="{% url 'tayangan:create_review' f.id %}">
+                {% csrf_token %}
+                <!-- <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="username" name="username" required>
+                </div> -->
+                <div class="mb-3">
+                    <label for="rating" class="form-label">Rating</label>
+                    <select class="form-control" id="rating" name="rating" required>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="5">6</option>
+                        <option value="5">7</option>
+                        <option value="5">8</option>
+                        <option value="5">9</option>
+                        <option value="5">10</option>
                     </select>
                 </div>
-                <div style="margin-top: 30px; margin-bottom: 30px;">
-                    <button class="btn btn-secondary" type="submit" style="width: 100%;font-size: 1.25em;">
-                        Submit Ulasan
-                    </button>
+                <div class="mb-3">
+                    <label for="deskripsi" class="form-label">Deskripsi</label>
+                    <textarea class="form-control" id="deskripsi" name="deskripsi" rows="3" required></textarea>
                 </div>
+                <button class="btn btn-secondary" type="submit" style="width: 100%;font-size: 1.25em;">
+                    Submit Ulasan
+                </button>
             </form>
+            {% endfor %}
         </div>
-        
+
         <div class="container my-5" w-10>
             <div class="center-container">
                 
@@ -221,7 +286,7 @@
                     <table id="example" class="table table-striped" style="width:100%; border-radius: 55px;">
                         <thead>
                             <tr>
-                                <th style="text-align: center;">id_tayangan</th>
+                                <!-- <th style="text-align: center;">id_tayangan</th> -->
                                 <th style="text-align: center;">Nama</th>
                                 <th style="text-align: center;">Waktu</th>
                                 <th style="text-align: center;">Rating</th>
@@ -229,13 +294,14 @@
                             </tr>
                         </thead>
                         <tbody>
+                            {% for r in reviews %}
                             <tr>
-                                <td>d2718217-0546-4b92-9c3f-4e71b31d85d8</td>
-                                <td>andikusnadi11</td>
-                                <td>4/19/2024 9:47:27</td>
-                                <td>8</td>
-                                <td>CGI-nya rill banget</td>
+                                <td>{{ r.username }}</td>
+                                <td>{{ r.timestamp }}</td>
+                                <td>{{ r.rating }}</td>
+                                <td>{{ r.deskripsi }}</td>
                             </tr>
+                            {% endfor %}
                         </tbody>
                     </table>
                 </div>
