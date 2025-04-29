@@ -85,10 +85,10 @@ WSGI_APPLICATION = 'pacilflix.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'postgres', 
-        'USER': 'postgres.ctbvstxphbfdrpuarhml',
-        'PASSWORD': '456basdaters',
-        'HOST': 'aws-0-ap-southeast-1.pooler.supabase.com', 
+        'NAME': 'pacilflix', 
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': '127.0.0.1', 
         'PORT': '5432',
     }
 }
@@ -154,4 +154,4 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CSRF_TRUSTED_ORIGINS = ['https://pacilflix-a14.up.railway.app']
+CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1:8000']
